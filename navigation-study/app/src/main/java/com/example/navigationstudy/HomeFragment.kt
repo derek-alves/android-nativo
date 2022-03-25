@@ -18,10 +18,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home, container, false)
-
 
         binding.submitButton.setOnClickListener {
             if(!TextUtils.isEmpty(binding.textName.text.toString())){
@@ -30,11 +27,7 @@ class HomeFragment : Fragment() {
             }else{
                 Toast.makeText(activity,"Por favor, insira o seu nome", Toast.LENGTH_SHORT).show()
             }
-
         }
-
         return binding.root
     }
-
-
 }
