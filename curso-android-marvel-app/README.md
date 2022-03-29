@@ -4,3 +4,4 @@ Projeto focado em estudar a plataforma android, utilizando as ferramentas mais a
 
 ## Ferramentas utilizadas
 - Detekt - Reponsável por fazer análise estática de código (lint)
+- Hilt - Responsável por fazer as injeções de dependências 
