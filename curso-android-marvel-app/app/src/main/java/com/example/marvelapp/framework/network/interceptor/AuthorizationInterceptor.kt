@@ -1,4 +1,4 @@
-package com.example.core.data.network
+package com.example.marvelapp.framework.network.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -14,7 +14,7 @@ class AuthorizationInterceptor(
     @Suppress("MagicNumber")
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
-        val requestUrl = request.url()
+        val requestUrl = request.url
 
         val ts = (calendar.timeInMillis / 1000L).toString()
         val hash = "$ts$privateKey$publicKey".md5()
