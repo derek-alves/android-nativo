@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.courotines_study.databinding.ActivityMainBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
     private var count = 0
@@ -36,9 +33,10 @@ class MainActivity : AppCompatActivity() {
     private suspend  fun downloadUserData() {
         withContext(Dispatchers.Main){
             for (i in 1..200000) {
-                Log.i("MyTag", "Downloading user $i in ${Thread.currentThread().name}")
                 binding.tvUserMessage.text = "Downloading user $i in ${Thread.currentThread().name}"
+                delay(timeMillis = 100)
             }
+
         }
 
     }
