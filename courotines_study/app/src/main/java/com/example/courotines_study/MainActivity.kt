@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.courotines_study.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
 
 class MainActivity : AppCompatActivity() {
     private var count = 0
@@ -22,8 +23,12 @@ class MainActivity : AppCompatActivity() {
         }
         binding.btnDownloadUserData.setOnClickListener {
 
-            CoroutineScope(Dispatchers.IO).launch {
-                downloadUserData()
+            CoroutineScope(Dispatchers.Main).launch {
+                Log.i("MyTag", "Calculation started...")
+                val stock1 = async(IO) { getStock1() }
+                val stock2 = async(IO){ getStock2() }
+                val total = stock1.await() + stock2.await()
+                Log.i("MyTag", "Total is $total")
             }
         }
 
@@ -39,6 +44,18 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    private suspend fun getStock1():Int{
+        delay(timeMillis = 10000)
+        Log.i("MyTag", "stock 1 returned")
+        return 55000
+    }
+
+    private suspend fun getStock2():Int{
+        delay(timeMillis = 8000)
+        Log.i("MyTag", "stock 1 returned")
+        return 35000
     }
 
 }
