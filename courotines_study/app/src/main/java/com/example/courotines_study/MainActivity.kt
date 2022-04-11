@@ -19,7 +19,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnCount.setOnClickListener {
-            binding.tvCount.text = count++.toString()
+           CoroutineScope(Dispatchers.Main).launch {
+               binding.tvCount.text = USerDataManager().getTotalUserCount().toString()
+           }
         }
         binding.btnDownloadUserData.setOnClickListener {
 
