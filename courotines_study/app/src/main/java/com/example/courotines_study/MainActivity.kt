@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.courotines_study.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -11,12 +13,20 @@ import kotlinx.coroutines.Dispatchers.IO
 class MainActivity : AppCompatActivity() {
     private var count = 0
     private lateinit var binding: ActivityMainBinding
+    private lateinit var mainActivityViewModel: MainActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        mainActivityViewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
+        mainActivityViewModel.getUserData()
+        mainActivityViewModel.users.observe(this, Observer { myUsers->
+            myUsers.forEach{
+                Log.i("MyTag","name is ${it.name}" )
+            }
+        })
 
         binding.btnCount.setOnClickListener {
            CoroutineScope(Dispatchers.Main).launch {
