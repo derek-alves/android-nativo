@@ -6,8 +6,9 @@ import androidx.paging.PagingData
 import com.example.core.data.repository.CharactersRepository
 import com.example.core.domain.model.Character
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class GetCharactersUseCase(
+class GetCharactersUseCase @Inject constructor(
     private val charactersRepository: CharactersRepository
 ): PagingUseCase<GetCharactersUseCase.GetCharactersParams, Character>() {
 
