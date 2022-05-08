@@ -9,8 +9,7 @@
 
    <include
        android:id="@+id/include_view_characters_loading_state"
-       layout="@layout/shimmer_layout_characters_item"/>
-
+       layout="@layout/include_view_characters_loading_state"/>
 
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/recycler_characters"
@@ -20,5 +19,6 @@
        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
        tools:listitem="@layout/item_characters"
        />
+
 
 </ViewFlipper>
