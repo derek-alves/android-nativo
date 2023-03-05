@@ -21,10 +21,12 @@ class MainActivity : ComponentActivity() {
             MeditationuiTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize().padding(MaterialTheme.spacing.small),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(MaterialTheme.spacing.small),
                     color = MaterialTheme.colors.background
                 ) {
-
+                    HomeScreen()
                 }
             }
         }
