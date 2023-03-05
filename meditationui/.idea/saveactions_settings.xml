@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SaveActionSettings">
+    <option name="actions">
+      <set>
+        <option value="activate" />
+        <option value="organizeImports" />
+        <option value="reformat" />
+        <option value="executeAction" />
+      </set>
+    </option>
+    <option name="configurationPath" value="" />
+    <option name="quickLists">
+      <list>
+        <option value="-340609990" />
+      </list>
+    </option>
+  </component>
+</project>
