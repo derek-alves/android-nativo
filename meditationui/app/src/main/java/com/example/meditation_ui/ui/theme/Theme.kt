@@ -15,10 +15,10 @@ private val DarkColorPalette = darkColors(
 )
 
 private val LightColorPalette = lightColors(
-    primary = DeepBlue,
+    primary = TextWhite,
     primaryVariant = DarkerButtonBlue,
     secondary = OrangeYellow1,
-    background = TextWhite
+    background = DeepBlue
 
     /* Other default colors to override
     background = Color.White,
