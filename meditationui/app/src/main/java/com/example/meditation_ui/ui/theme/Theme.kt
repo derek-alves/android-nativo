@@ -8,17 +8,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 
 private val DarkColorPalette = darkColors(
-    primary = TextWhite,
-    primaryVariant = DarkerButtonBlue,
+
+
     secondary = OrangeYellow1,
-    background = DeepBlue
-)
+    surface = DeepBlue,
+    onSurface = TextWhite,
+
+    )
 
 private val LightColorPalette = lightColors(
-    primary = TextWhite,
-    primaryVariant = DarkerButtonBlue,
+    primary = DeepBlue,
+    onPrimary = TextWhite,
     secondary = OrangeYellow1,
-    background = DeepBlue
+    onBackground = TextWhite,
+    onSurface = TextWhite,
+
 
     /* Other default colors to override
     background = Color.White,
@@ -38,7 +42,7 @@ fun MeditationuiTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Comp
         LightColorPalette
     }
 
-    CompositionLocalProvider(LocalSpacing provides Spacing()) {
+    CompositionLocalProvider(LocalSizes provides Sizes()) {
         MaterialTheme(
             colors = colors, typography = Typography, shapes = Shapes, content = content
         )
