@@ -1,4 +1,4 @@
-package com.example.meditation_ui
+package com.example.meditation_ui.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,103 +18,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.meditation_ui.entity.Feature
-import com.example.meditation_ui.ui.components.ChipSection
-import com.example.meditation_ui.ui.components.CurrentMeditation
-import com.example.meditation_ui.ui.components.CustomTopAppBar
-import com.example.meditation_ui.ui.theme.*
-
-
-val features: List<Feature> = listOf(
-    Feature(
-        title = "Sleep meditation",
-        R.drawable.ic_headphone,
-        BlueViolet1,
-        BlueViolet2,
-        BlueViolet3
-    ),
-    Feature(
-        title = "Tips for sleeping",
-        R.drawable.ic_videocam,
-        LightGreen1,
-        LightGreen2,
-        LightGreen3
-    ),
-    Feature(
-        title = "Night island",
-        R.drawable.ic_headphone,
-        OrangeYellow1,
-        OrangeYellow2,
-        OrangeYellow3
-    ),
-    Feature(
-        title = "Calming sounds",
-        R.drawable.ic_videocam,
-        Beige1,
-        Beige2,
-        Beige3
-    ), Feature(
-        title = "Sleep meditation",
-        R.drawable.ic_headphone,
-        BlueViolet1,
-        BlueViolet2,
-        BlueViolet3
-    ),
-    Feature(
-        title = "Tips for sleeping",
-        R.drawable.ic_videocam,
-        LightGreen1,
-        LightGreen2,
-        LightGreen3
-    ),
-    Feature(
-        title = "Night island",
-        R.drawable.ic_headphone,
-        OrangeYellow1,
-        OrangeYellow2,
-        OrangeYellow3
-    ),
-    Feature(
-        title = "Calming sounds",
-        R.drawable.ic_headphone,
-        Beige1,
-        Beige2,
-        Beige3
-    )
-
-
-)
-
-@Preview(showBackground = true)
-@Composable
-fun HomeScreen() {
-    Scaffold(
-        backgroundColor = DeepBlue,
-        topBar = { CustomTopAppBar() },
-        content = { Body() },
-    )
-
-
-}
-
-
-@Composable
-fun Body() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(
-                MaterialTheme.sizes.medium
-            )
-    ) {
-        ChipSection(listOf("Android", "Flutter", "React native"))
-        CurrentMeditation()
-        FeatureSection(features = features)
-    }
-}
-
+import com.example.meditation_ui.ui.theme.ButtonBlue
+import com.example.meditation_ui.ui.theme.TextWhite
+import com.example.meditation_ui.ui.theme.sizes
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
