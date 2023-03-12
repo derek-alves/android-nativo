@@ -12,6 +12,11 @@ import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class MainViewModel : ViewModel() {
+
+    private val _stateFlow = MutableStateFlow(0)
+    val counter = _stateFlow.asStateFlow()
+
+
     private val _color = MutableStateFlow(0xffffffff)
     val color = _color.asStateFlow()
 
@@ -23,6 +28,10 @@ class MainViewModel : ViewModel() {
         val color = Random.nextLong(0xffffffff)
         _color.value = color
         composeColor = color
+    }
+
+    fun incrementCounter(){
+        _stateFlow.value +=1
     }
 
     val countDownFlow = flow<Int> {
