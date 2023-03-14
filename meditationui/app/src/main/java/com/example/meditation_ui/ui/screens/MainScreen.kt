@@ -15,11 +15,13 @@ import com.example.meditation_ui.ui.screens.CustomBottomBar
 @Preview()
 @Composable
 fun MainScreen() {
+
     val navController = rememberNavController()
 
     Scaffold(
         bottomBar = {
             CustomBottomBar(
+
                 navController = navController,
                 onItemClick = {
                     navController.navigate(it.route)
@@ -28,8 +30,9 @@ fun MainScreen() {
                     BottomMenuContent("Home", "home", R.drawable.ic_home),
                     BottomMenuContent("Music", "played", R.drawable.ic_music),
 
-                    )
-            )
+                    ),
+         
+                )
         }) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
             NavigationHost(navController = navController)
