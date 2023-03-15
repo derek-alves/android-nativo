@@ -7,5 +7,13 @@
 
     <fragment
         android:id="@+id/messageFragment"
-        tools:layout="@layout/fragment_message" />
+        tools:layout="@layout/fragment_message">
+        <action
+            android:id="@+id/action_messageFragment_to_courseFragment"
+            app:destination="@id/courseFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/courseFragment"
+        tools:layout="@layout/fragment_course" />
 </navigation>
