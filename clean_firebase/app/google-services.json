@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "557587871069",
+    "project_id": "clean-firebase-b80c3",
+    "storage_bucket": "clean-firebase-b80c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557587871069:android:3a162c2b419e1da73324b4",
+        "android_client_info": {
+          "package_name": "com.study.clean_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557587871069-kf5qujccmp6uh45cl6jnqsrg8osv4fuc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF-sVf8UPWftP_zR1fb_5lF132XLsdOz4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557587871069-kf5qujccmp6uh45cl6jnqsrg8osv4fuc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
