@@ -20,11 +20,7 @@ class BaseApp(
     private lateinit var navController: NavController
     private val routes = mutableListOf<AppRoute>()
 
-    init {
-        microApps.forEach { app ->
-            routes.addAll(app.routes)
-        }
-    }
+
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
@@ -46,17 +42,14 @@ class BaseApp(
                 NavHost(
                     modifier = Modifier.padding(innerPadding),
                     navController = navController as NavHostController,
-                    startDestination = startRoute::class.qualifiedName!!
+                    startDestination = startRoute
                 ) {
-                    routes.forEach { route ->
-                        print(route::class.qualifiedName!!)
-                        composable(
-                            route = route::class.qualifiedName!!
-                        ) { it ->
-                            val app = microApps.firstOrNull { it.routes.contains(route) }
-                            app?.content(route, it)?.invoke()
-                        }
-                    }
+                   microApps.forEach{app->
+                       with(this){
+                                app.registerRoutes()
+                       }
+
+                   }
                 }
             }
         )

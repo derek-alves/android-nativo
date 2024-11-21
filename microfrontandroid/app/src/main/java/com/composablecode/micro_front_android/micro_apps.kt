@@ -4,38 +4,25 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
 
-class HomeMicroApp : MicroApp {
-    override val routes = listOf(
-        AppRoute.Home,
-        AppRoute.HomeDetails,
-        AppRoute.HomeSettings
-    )
-
-    override fun content(
-        route: AppRoute,
-        backStackEntry: NavBackStackEntry
-    ): @Composable () -> Unit = {
-        when (route) {
-            is AppRoute.Home -> HomeScreen(  onNavigateToDetails = {
-                NavigatorServiceProvider.I.navigateTo(AppRoute.HomeDetails::class.qualifiedName!!)
+class HomeMicroApp() : MicroApp {
+    override fun NavGraphBuilder.registerRoutes() {
+        composable<AppRoute.Home> {
+            HomeScreen(onNavigateToDetails = {
+                NavigatorServiceProvider.I.navigateTo(AppRoute.HomeDetails)
             })
-            is AppRoute.HomeDetails -> HomeDetailsScreen()
-            is AppRoute.HomeSettings -> HomeSettingsScreen()
-            else -> throw IllegalArgumentException("Unsupported route: $route")
         }
+        composable<AppRoute.HomeDetails>() { HomeDetailsScreen() }
+        composable<AppRoute.HomeSettings>() { HomeSettingsScreen() }
     }
+
 }
 
 class ProfileMicroApp : MicroApp {
-    override val routes = listOf(AppRoute.Profile)
-
-    override fun content(
-        route: AppRoute,
-        backStackEntry: NavBackStackEntry
-    ): @Composable () -> Unit = {
-
-        ProfileScreen(userId = "AAA AA")
+    override fun NavGraphBuilder.registerRoutes() {
+        composable<AppRoute.Profile> { ProfileScreen(userId = "AAA AA") }
     }
 }
 
@@ -51,7 +38,7 @@ fun HomeDetailsScreen() {
 }
 
 @Composable
-fun HomeScreen(onNavigateToDetails  : () -> Unit = {}) {
+fun HomeScreen(onNavigateToDetails: () -> Unit = {}) {
     Text("Home Screen")
     Button(onClick = onNavigateToDetails) {
         Text("Navigate to Details")

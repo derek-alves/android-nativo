@@ -11,14 +11,14 @@ object NavigatorServiceProvider {
 }
 
 class NavigationService(private val navController: NavController) {
-    private val registeredRoutes = mutableMapOf<String, AppRoute>()
+    private val registeredRoutes = mutableListOf<AppRoute>()
 
     fun registerRoute(route: AppRoute) {
-        registeredRoutes[route::class.qualifiedName!!] = route
+        registeredRoutes.add(route)
     }
 
-    fun navigateTo(route: String) {
-        if (registeredRoutes.containsKey(route)) {
+    fun navigateTo(route: AppRoute) {
+        if (registeredRoutes.contains(route)) {
             navController.navigate(route)
         }
     }
