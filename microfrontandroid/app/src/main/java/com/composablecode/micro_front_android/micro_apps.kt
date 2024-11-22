@@ -10,13 +10,13 @@ import androidx.navigation.compose.composable
 class HomeMicroApp() : MicroApp {
     override fun registerPages(navigationService: NavigationService) {
        navigationService.addPage(
-           Page<AppRoute.Home> {
+           Page(AppRoute.Home) {
                HomeScreen()
            }
        )
         navigationService.addPage(
-            Page<AppRoute.HomeDetails> {
-                HomeDetailsScreen()
+            Page (AppRoute.HomeDetails){
+              HomeDetailsScreen()
             }
         )
     }
@@ -36,7 +36,7 @@ class HomeMicroApp() : MicroApp {
 class ProfileMicroApp : MicroApp {
     override fun registerPages(navigationService: NavigationService) {
         navigationService.addPage(
-            Page<AppRoute.Profile> {
+            Page (AppRoute.Profile){
                 ProfileScreen(userId = "AAA AA")
             }
         )

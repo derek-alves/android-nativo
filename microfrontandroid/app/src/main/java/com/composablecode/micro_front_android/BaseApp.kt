@@ -42,6 +42,7 @@ class BaseApp(
                     startDestination = startRoute
                 ) {
                     registerMicroApps(microApps)
+
                 }
             }
         )
