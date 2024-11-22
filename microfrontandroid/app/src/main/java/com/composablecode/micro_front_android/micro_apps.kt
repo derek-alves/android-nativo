@@ -8,21 +8,42 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 
 class HomeMicroApp() : MicroApp {
-    override fun NavGraphBuilder.registerRoutes() {
-        composable<AppRoute.Home> {
+    override fun registerPages(navigationService: NavigationService) {
+       navigationService.addPage(
+           Page<AppRoute.Home> {
+               HomeScreen()
+           }
+       )
+        navigationService.addPage(
+            Page<AppRoute.HomeDetails> {
+                HomeDetailsScreen()
+            }
+        )
+    }
+
+    override fun registerRoutes(builder: NavGraphBuilder) {
+        builder.composable<AppRoute.Home> {
             HomeScreen(onNavigateToDetails = {
                 NavigatorServiceProvider.I.navigateTo(AppRoute.HomeDetails)
             })
         }
-        composable<AppRoute.HomeDetails>() { HomeDetailsScreen() }
-        composable<AppRoute.HomeSettings>() { HomeSettingsScreen() }
+        builder.composable<AppRoute.HomeDetails>() { HomeDetailsScreen() }
+        builder.composable<AppRoute.HomeSettings>() { HomeSettingsScreen() }
     }
 
 }
 
 class ProfileMicroApp : MicroApp {
-    override fun NavGraphBuilder.registerRoutes() {
-        composable<AppRoute.Profile> { ProfileScreen(userId = "AAA AA") }
+    override fun registerPages(navigationService: NavigationService) {
+        navigationService.addPage(
+            Page<AppRoute.Profile> {
+                ProfileScreen(userId = "AAA AA")
+            }
+        )
+    }
+
+    override fun registerRoutes(builder: NavGraphBuilder) {
+        builder.composable<AppRoute.Profile> { ProfileScreen(userId = "AAA AA") }
     }
 }
 

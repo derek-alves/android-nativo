@@ -7,13 +7,30 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 
 interface MicroApp {
-    fun NavGraphBuilder.registerRoutes()
+    fun registerPages(navigationService: NavigationService)
+    fun registerRoutes(builder: NavGraphBuilder)
 }
 
-class Page<T: AppRoute>(val content: @Composable () -> Unit) {
-    inline fun <reified T: AppRoute> NavGraphBuilder.addPage(){
-        composable<T>{
+class Page<out T: AppRoute>(val content: @Composable () -> Unit) {
+    inline fun <reified T : AppRoute>  addPage(builder: NavGraphBuilder){
+         builder.composable<T>{
             content()
             }
+    }
+}
+
+fun Page<AppRoute>.register() {
+    NavigatorServiceProvider.I.addPage(this)
+}
+
+fun NavGraphBuilder.registerMicroApps(microApps: List<MicroApp>) {
+    microApps.forEach { app ->
+        with(this) {
+            app.registerRoutes(this)
+            app.registerPages(NavigatorServiceProvider.I)
+            NavigatorServiceProvider.I.getRegisteredPages().forEach {
+                it.addPage(this)
+            }
+        }
     }
 }

@@ -11,16 +11,17 @@ object NavigatorServiceProvider {
 }
 
 class NavigationService(private val navController: NavController) {
-    private val registeredRoutes = mutableListOf<AppRoute>()
-
-    fun registerRoute(route: AppRoute) {
-        registeredRoutes.add(route)
+    private val registeredPages = mutableListOf<Page<AppRoute>>()
+    fun addPage(page: Page<AppRoute>) {
+        registeredPages.add(page)
     }
 
     fun navigateTo(route: AppRoute) {
-        if (registeredRoutes.contains(route)) {
             navController.navigate(route)
-        }
+    }
+
+    fun getRegisteredPages() : List<Page<AppRoute>> {
+        return registeredPages
     }
 
     fun navigateBack() {

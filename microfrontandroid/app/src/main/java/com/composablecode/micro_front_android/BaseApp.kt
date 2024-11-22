@@ -29,9 +29,6 @@ class BaseApp(
 
         NavigatorServiceProvider.initialize(navController)
 
-        routes.forEach { route ->
-            NavigatorServiceProvider.I.registerRoute(route)
-        }
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -44,12 +41,7 @@ class BaseApp(
                     navController = navController as NavHostController,
                     startDestination = startRoute
                 ) {
-                   microApps.forEach{app->
-                       with(this){
-                                app.registerRoutes()
-                       }
-
-                   }
+                    registerMicroApps(microApps)
                 }
             }
         )
