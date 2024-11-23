@@ -27,7 +27,6 @@ class MainActivity : ComponentActivity() {
                     ),
                     startRoute = AppRoute.Home
                 )
-
                 baseApp.Render()
                 }
             }

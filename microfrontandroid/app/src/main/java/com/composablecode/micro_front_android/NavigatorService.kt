@@ -16,23 +16,23 @@ object NavigatorServiceProvider {
 
 class NavigationService(private val navController: NavController) {
     private val registeredPages = mutableListOf<Page<AppRoute>>()
-    private val registeredPages2 = mutableMapOf<KClass<out AppRoute>,@Composable () -> Unit>()
+    private val registeredPages2 = mutableMapOf<AppRoute,@Composable () -> Unit>()
 
-    fun registerPage(route: KClass<AppRoute>, content: @Composable () -> Unit) {
+    fun registerPage(route: AppRoute, content: @Composable () -> Unit) {
         registeredPages2[route] = content
     }
 
     fun addPage(page: Page<AppRoute>) {
-        registeredPages2[page.route::class] = page.content
-        //registeredPages.add(page)
+        registeredPages.add(page)
+
     }
 
     fun navigateTo(route: AppRoute) {
             navController.navigate(route)
     }
 
-    fun getRegisteredPages() : MutableMap<KClass<out AppRoute>,@Composable () -> Unit> {
-        return registeredPages2
+    fun getRegisteredPages(): MutableList<Page<AppRoute>> {
+        return registeredPages
     }
 
     fun navigateBack() {
