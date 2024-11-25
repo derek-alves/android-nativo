@@ -16,5 +16,8 @@ sealed class AppRoute {
 
     @Serializable
     data object Profile : AppRoute()
+
+    @Serializable
+    data object ProfileSettings : AppRoute()
 }
 

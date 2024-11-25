@@ -5,19 +5,20 @@ import androidx.navigation.NavGraphBuilder
 
 
 interface MicroApp {
-    fun registerPages(navigationService: NavigationService)
-    fun registerRoutes(builder: NavGraphBuilder)
+    fun pages(registryService: RegistryService)
 }
 
-
-
-fun NavGraphBuilder.registerMicroApps(microApps: List<MicroApp>) {
+fun NavGraphBuilder.registerMicroApps(
+    microApps: List<MicroApp>,
+    registryService: RegistryService
+) {
     microApps.forEach { app ->
         with(this) {
-            app.registerRoutes(this)
-            app.pages.forEach { page ->
+            app.pages(registryService)
+            registryService.getRegisteredPages().forEach { page ->
+                page.register(this)
+            }
         }
     }
 }
-
 
