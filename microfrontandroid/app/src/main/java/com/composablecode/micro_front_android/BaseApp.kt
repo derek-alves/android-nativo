@@ -16,7 +16,7 @@ fun BaseApp(
 ) {
     val navController: NavController = rememberNavController()
     NavigatorServiceProvider.initialize(navController)
-    val registryService = RegistryService()
+   
     Scaffold(
         content = { innerPadding ->
             NavHost(
@@ -26,7 +26,7 @@ fun BaseApp(
             ) {
                 registerMicroApps(
                     microApps,
-                    registryService,
+                    RegistryService,
                 )
             }
         }

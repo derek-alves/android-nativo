@@ -9,14 +9,14 @@ class HomeMicroApp() : MicroApp {
     override fun pages(registryService: RegistryService) {
         registryService.apply {
             addPage(
-                Page(AppRoute.Home) {
+                Page(AppRoute.Home) { _, _ ->
                     HomeScreen(onNavigateToDetails = {
                         NavigatorServiceProvider.I.navigateTo(AppRoute.HomeDetails)
                     })
                 },
             )
             addPage(
-                Page(AppRoute.HomeDetails) {
+                Page(AppRoute.HomeDetails) { _, _ ->
                     HomeDetailsScreen()
                 },
             )
@@ -29,13 +29,18 @@ class HomeMicroApp() : MicroApp {
 class ProfileMicroApp : MicroApp {
     override fun pages(registryService: RegistryService) {
         registryService.apply {
+            register<AppRoute.Profile> { route ->
+                Page(route) { args, _ ->
+                    ProfileScreen(userId = args.userId)
+                }
+            }
             addPage(
-                Page(AppRoute.Profile) {
-                    ProfileScreen(userId = "AAA AA")
+                Page(AppRoute.ProfileSettings) { _, _ ->
+                    ProfileSettingsScreen()
                 },
             )
             addPage(
-                Page(AppRoute.ProfileSettings) {
+                Page(AppRoute.ProfileSettings) { _, _ ->
                     ProfileSettingsScreen()
                 },
             )
@@ -60,7 +65,7 @@ fun HomeDetailsScreen() {
     Column {
         Text("Home Details Screen")
         Button(onClick = {
-            NavigatorServiceProvider.I.navigateTo(AppRoute.Profile)
+            NavigatorServiceProvider.I.navigateTo(AppRoute.Profile("123"))
         }) {
             Text("Navigate to Profile")
         }

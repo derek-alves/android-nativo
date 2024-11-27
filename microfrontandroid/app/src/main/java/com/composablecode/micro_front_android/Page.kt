@@ -37,8 +37,9 @@ class Page<T : AppRoute>(
     private val route: T,
     private val typeMap: Map<KType, @JvmSuppressWildcards NavType<*>> = emptyMap(),
     private val deepLinks: List<String> = emptyList(),
-    private val content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit,
+    private val content: @Composable AnimatedContentScope.(args: T, NavBackStackEntry) -> Unit,
 ) {
+
     fun register(
         navGraphBuilder: NavGraphBuilder,
         enterTransition:
@@ -62,14 +63,16 @@ class Page<T : AppRoute>(
         SizeTransform?)? =
             null,
     ) {
-        val navigator = navGraphBuilder.provider[ComposeNavigator::class] as ComposeNavigator
+        val navigator = navGraphBuilder.provider[ComposeNavigator::class]
         navGraphBuilder.destination(
             ComposeNavigatorDestinationBuilder(
                 navigator = navigator,
                 route = route::class,
                 typeMap = typeMap,
-                content = content
-            ).apply {
+
+                ) {
+                content(route, it)
+            }.apply {
                 deepLinks.forEach { deepLink -> deepLink(deepLink) }
                 this.enterTransition = enterTransition
                 this.exitTransition = exitTransition
