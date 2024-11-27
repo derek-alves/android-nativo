@@ -15,6 +15,9 @@ sealed class AppRoute {
     data object HomeSettings : AppRoute()
 
     @Serializable
-    data object Profile : AppRoute()
+    data class Profile(val userId: String) : AppRoute()
+
+    @Serializable
+    data object ProfileSettings : AppRoute()
 }
 

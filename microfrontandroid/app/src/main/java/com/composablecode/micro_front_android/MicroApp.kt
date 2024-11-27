@@ -1,9 +1,24 @@
 package com.composablecode.micro_front_android
 
-import androidx.compose.runtime.Composable
-import androidx.navigation.NavBackStackEntry
+
+import androidx.navigation.NavGraphBuilder
+
 
 interface MicroApp {
-    val routes: List<AppRoute>
-    fun content(route: AppRoute, backStackEntry: NavBackStackEntry): @Composable () -> Unit
+    fun pages(registryService: RegistryService)
 }
+
+fun NavGraphBuilder.registerMicroApps(
+    microApps: List<MicroApp>,
+    registryService: RegistryService
+) {
+    microApps.forEach { app ->
+        with(this) {
+            app.pages(registryService)
+            registryService.getRegisteredPages().forEach { page ->
+                page.register(this)
+            }
+        }
+    }
+}
+
