@@ -1,5 +1,7 @@
 package com.plcoding.bookpedia
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -11,11 +13,16 @@ import com.plcoding.bookpedia.book.presentation.book_list.components.BookSearchB
 @Composable
 fun BookSearchBarPreview() {
     MaterialTheme {
-        BookSearchBar(
-            searchQuery = "kotlin",
-            onSearchQueryChange = {},
-            onImeSearch = {},
-            modifier = Modifier.fillMaxWidth()
-        )
+        Box(
+            modifier = Modifier.fillMaxWidth().background(MaterialTheme.colors.background)
+        ){
+            BookSearchBar(
+                searchQuery = "",
+                onSearchQueryChange = {},
+                onImeSearch = {},
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
     }
 }
