@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "com.composablecode.coroutinesflow"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.composablecode.coroutinesflow"
