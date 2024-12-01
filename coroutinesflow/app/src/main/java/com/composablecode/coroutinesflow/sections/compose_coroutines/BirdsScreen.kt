@@ -131,7 +131,6 @@ fun BirdSoundsApp() {
 
 @Composable
 fun BirdComposable(birdName: String, interval: Long) {
-    // LaunchedEffect to manage the coroutine for bird sounds
     LaunchedEffect(birdName) {
         while (isActive) {
             println(birdName)
