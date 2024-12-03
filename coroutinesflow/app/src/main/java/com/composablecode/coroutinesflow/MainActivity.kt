@@ -11,6 +11,7 @@ import com.composablecode.coroutinesflow.ui.theme.CoroutinesflowTheme
 import com.composablecode.coroutinesflow.sections.compose_coroutines.CounterScreen
 import com.composablecode.coroutinesflow.sections.compose_coroutines.ProfileScreen
 import com.composablecode.coroutinesflow.sections.coroutines_context.queryDatabase
+import com.composablecode.coroutinesflow.sections.coroutines_context.withContextDemo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -26,7 +27,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         val job = lifecycleScope.launch {
                 queryDatabase()
-
+            withContextDemo()
             val profileDeferred = async{
                 println("Fetching profile")
                 delay(2000L)
