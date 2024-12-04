@@ -1,29 +1,186 @@
 package com.composablecode.voyagerstudy
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
+
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Button
+import androidx.compose.foundation.layout.RowScope
+
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.DrawerValue
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.ListItem
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ModalDrawer
+import androidx.compose.material.Scaffold
+import androidx.compose.material.TabRow
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.rememberDrawerState
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import cafe.adriel.voyager.core.annotation.InternalVoyagerApi
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
+
 import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.navigator.tab.CurrentTab
+import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
+import cafe.adriel.voyager.navigator.tab.Tab
+import cafe.adriel.voyager.navigator.tab.TabNavigator
+import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.composablecode.voyagerstudy.screens.ScreenA
-import org.jetbrains.compose.resources.painterResource
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-import voyagerstudy.composeapp.generated.resources.Res
-import voyagerstudy.composeapp.generated.resources.compose_multiplatform
 
-@OptIn(InternalVoyagerApi::class)
 @Composable
 @Preview
 fun App() {
     MaterialTheme {
-        Navigator(ScreenA())
+        TabNavigationExample()
     }
+}
+
+@Composable
+fun TabNavigationExample() {
+    val scope = rememberCoroutineScope()
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    TabNavigator(HomeTab) {
+        ModalDrawer(
+            drawerState = drawerState,
+            drawerContent = {
+                Column {
+                    DrawerItem(HomeTab)
+                    DrawerItem(ProfileTab)
+                    DrawerItem(SettingsTab)
+                }
+            },
+            content = {
+                Scaffold(
+                    topBar = {
+                        TopAppBar(
+                            title = { Text("App Title") },
+                            navigationIcon = {
+                                IconButton(onClick = {
+                                    scope.launch { drawerState.open() }
+                                }) {
+                                    Icon(Icons.Default.Menu, contentDescription = "Menu")
+                                }
+                            }
+                        )
+                    },
+                    content = {
+                        CurrentTab()
+                    })
+            }
+        )
+//        Scaffold(
+//            drawerContent = {
+//
+//            },
+//            content = {
+//                CurrentTab()
+//            },
+//            bottomBar = {
+//                BottomNavigation {
+//                    TabNavigationItem(HomeTab)
+//                    TabNavigationItem(ProfileTab)
+//                    TabNavigationItem(SettingsTab)
+//                }
+//            }
+//        )
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun DrawerItem(tab: Tab) {
+    val tabNavigator = LocalTabNavigator.current
+    ListItem(
+        text = { Text(tab.options.title) },
+        icon = { Icon(tab.options.icon!!, contentDescription = null) },
+        modifier = Modifier.clickable { tabNavigator.current = tab }
+    )
+}
+
+@Composable
+private fun RowScope.TabNavigationItem(tab: Tab) {
+    val tabNavigator = LocalTabNavigator.current
+
+    BottomNavigationItem(
+        selected = tabNavigator.current == tab,
+        onClick = { tabNavigator.current = tab },
+        icon = { Icon(painter = tab.options.icon!!, contentDescription = tab.options.title) }
+    )
+}
+
+object HomeTab : Tab {
+    @Composable
+    override fun Content() {
+        Text("Welcome to Home Tab!")
+    }
+
+    override val options: TabOptions
+        @Composable
+        get() {
+            val title = "Home"
+            val icon = rememberVectorPainter(Icons.Default.Home)
+
+            return remember {
+                TabOptions(
+                    index = 0u,
+                    title = title,
+                    icon = icon
+                )
+            }
+        }
+}
+
+object ProfileTab : Tab {
+    @Composable
+    override fun Content() {
+        Text("This is the Profile Tab!")
+    }
+    override val options: TabOptions
+        @Composable
+        get() {
+            val title = "Profile"
+            val icon = rememberVectorPainter(Icons.Default.Person)
+
+            return remember {
+                TabOptions(
+                    index = 1u,
+                    title = title,
+                    icon = icon
+                )
+            }
+        }
+}
+
+object SettingsTab : Tab {
+    @Composable
+    override fun Content() {
+        Text("Settings are here.")
+    }
+
+    override val options: TabOptions
+        @Composable
+        get() {
+            val title = "settings"
+            val icon = rememberVectorPainter(Icons.Default.Settings)
+
+            return remember {
+                TabOptions(
+                    index = 2u,
+                    title = title,
+                    icon = icon
+                )
+            }
+        }
 }
