@@ -4,8 +4,6 @@ package com.composablecode.voyagerstudy
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
-
-import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.DrawerValue
 import androidx.compose.material.ExperimentalMaterialApi
@@ -15,7 +13,6 @@ import androidx.compose.material.ListItem
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ModalDrawer
 import androidx.compose.material.Scaffold
-import androidx.compose.material.TabRow
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
@@ -24,17 +21,19 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.rememberDrawerState
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
-
-import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import com.composablecode.voyagerstudy.screens.ScreenA
+import com.composablecode.voyagerstudy.responsive.BreakPointPlatform
+import com.composablecode.voyagerstudy.responsive.Breakpoint
+import com.composablecode.voyagerstudy.responsive.ResponsiveLayout
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -43,7 +42,16 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Preview
 fun App() {
     MaterialTheme {
-        TabNavigationExample()
+        ResponsiveLayout(
+            composable = {
+                TabNavigationExample()
+            },
+            breakpoints = listOf(
+                Breakpoint(start = 0.0, end = 450.0, type = BreakPointPlatform.MOBILE),
+                Breakpoint(start = 451.0, end = 800.0, type = BreakPointPlatform.TABLET),
+                Breakpoint(start = 801.0, end = 1920.0, type = BreakPointPlatform.DESKTOP),
+            )
+        ).Build()
     }
 }
 
@@ -147,6 +155,7 @@ object ProfileTab : Tab {
     override fun Content() {
         Text("This is the Profile Tab!")
     }
+
     override val options: TabOptions
         @Composable
         get() {
