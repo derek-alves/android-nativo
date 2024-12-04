@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.lifecycleScope
+import com.composablecode.coroutinesflow.exercise.AssignmentTwoScreen
 import com.composablecode.coroutinesflow.sections.compose_coroutines.BirdSoundsApp
 import com.composablecode.coroutinesflow.sections.compose_coroutines.BirdsScreen
 import com.composablecode.coroutinesflow.ui.theme.CoroutinesflowTheme
@@ -53,7 +54,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             CoroutinesflowTheme {
-                BirdSoundsApp()
+                AssignmentTwoScreen()
             }
         }
     }
