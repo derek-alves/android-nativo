@@ -8,10 +8,11 @@ Este repositório reúne uma série de estudos e projetos focados no desenvolvim
 - **Jetpack Compose**: Projetos explorando a construção de interfaces declarativas com o Jetpack Compose.
 - **Compose Multiplatform**: Estudos sobre a criação de interfaces compartilhadas entre Android e outras plataformas usando Compose Multiplatform.
 - **Decompose e Voyager**: Exemplos de navegação e gerenciamento de estado utilizando as bibliotecas Decompose e Voyager.
+- **RiBs**: arquitetura utilizada pela uber.
 
 ## Tecnologias Utilizadas
 
-- **Linguagens**: ![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white) ![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white)
+- **Linguagens**: ![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)
 - **Ferramentas e Bibliotecas**:
   - ![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpack-compose&logoColor=white)
   - ![Kotlin Coroutines](https://img.shields.io/badge/Kotlin%20Coroutines-0095D5?style=for-the-badge&logo=kotlin&logoColor=white)
