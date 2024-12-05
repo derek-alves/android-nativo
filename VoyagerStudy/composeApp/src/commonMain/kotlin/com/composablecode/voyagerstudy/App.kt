@@ -24,14 +24,17 @@ import androidx.compose.material.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.composablecode.voyagerstudy.responsive.Breakpoint
+import com.composablecode.voyagerstudy.responsive.MaxWidthBox
 import com.composablecode.voyagerstudy.responsive.ResponsiveLayout
 import com.composablecode.voyagerstudy.responsive.mediaQueryProvider
 import com.composablecode.voyagerstudy.responsive.utils.BreakPointPlatform
@@ -50,8 +53,11 @@ fun App() {
                 Breakpoint(start = 801.0, end = 1920.0, type = BreakPointPlatform.DESKTOP),
             )
         ) {
-            TabNavigationExample()
-        }.Build()
+            MaxWidthBox(maxWidth = 900.dp, alignment = Alignment.Center) {
+                TabNavigationExample()
+            }
+
+        }
     }
 }
 
@@ -61,34 +67,35 @@ fun TabNavigationExample() {
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     TabNavigator(HomeTab) {
-        ModalDrawer(
-            drawerState = drawerState,
-            drawerContent = {
-                Column {
-                    DrawerItem(HomeTab)
-                    DrawerItem(ProfileTab)
-                    DrawerItem(SettingsTab)
-                }
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text("${mediaQuery.breakpoint.type}: ${mediaQuery.isMobile} + ${mediaQuery.orientation}") },
+                    navigationIcon = {
+                        IconButton(onClick = {
+                            scope.launch { drawerState.open() }
+                        }) {
+                            Icon(Icons.Default.Menu, contentDescription = "Menu")
+                        }
+                    }
+                )
             },
             content = {
-                Scaffold(
-                    topBar = {
-                        TopAppBar(
-                            title = { Text("${mediaQuery.breakpoint.type}: ${mediaQuery.isMobile} + ${mediaQuery.orientation}") },
-                            navigationIcon = {
-                                IconButton(onClick = {
-                                    scope.launch { drawerState.open() }
-                                }) {
-                                    Icon(Icons.Default.Menu, contentDescription = "Menu")
-                                }
-                            }
-                        )
+                ModalDrawer(
+                    drawerState = drawerState,
+                    drawerContent = {
+                        Column {
+                            DrawerItem(HomeTab)
+                            DrawerItem(ProfileTab)
+                            DrawerItem(SettingsTab)
+                        }
                     },
                     content = {
                         CurrentTab()
                     })
-            }
-        )
+
+            })
+
 //        Scaffold(
 //            drawerContent = {
 //
