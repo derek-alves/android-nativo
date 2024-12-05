@@ -31,9 +31,10 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import com.composablecode.voyagerstudy.responsive.BreakPointPlatform
 import com.composablecode.voyagerstudy.responsive.Breakpoint
 import com.composablecode.voyagerstudy.responsive.ResponsiveLayout
+import com.composablecode.voyagerstudy.responsive.mediaQueryProvider
+import com.composablecode.voyagerstudy.responsive.utils.BreakPointPlatform
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -43,20 +44,20 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun App() {
     MaterialTheme {
         ResponsiveLayout(
-            composable = {
-                TabNavigationExample()
-            },
             breakpoints = listOf(
                 Breakpoint(start = 0.0, end = 450.0, type = BreakPointPlatform.MOBILE),
                 Breakpoint(start = 451.0, end = 800.0, type = BreakPointPlatform.TABLET),
                 Breakpoint(start = 801.0, end = 1920.0, type = BreakPointPlatform.DESKTOP),
             )
-        ).Build()
+        ) {
+            TabNavigationExample()
+        }.Build()
     }
 }
 
 @Composable
 fun TabNavigationExample() {
+    val mediaQuery = mediaQueryProvider.current
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     TabNavigator(HomeTab) {
@@ -73,7 +74,7 @@ fun TabNavigationExample() {
                 Scaffold(
                     topBar = {
                         TopAppBar(
-                            title = { Text("App Title") },
+                            title = { Text("${mediaQuery.breakpoint.type}: ${mediaQuery.isMobile} + ${mediaQuery.orientation}") },
                             navigationIcon = {
                                 IconButton(onClick = {
                                     scope.launch { drawerState.open() }
