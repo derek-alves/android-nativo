@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun MaxWidthBox(
     maxWidth: Dp? = null,
-    alignment: Alignment = Alignment.TopCenter, // Alignment for the whole Box
+    alignment: Alignment = Alignment.TopCenter,
     padding: Dp = 0.dp,
     backgroundColor: Color = Color.Transparent,
     content: @Composable () -> Unit
@@ -30,12 +30,10 @@ fun MaxWidthBox(
             maxWidth?.let { minOf(it, constraints.maxWidth.toDp(Density(1.5f))) }
                 ?: constraints.maxWidth.toDp(Density(1.5f))
 
-        // Outer Box centers the inner Box
         Box(
             modifier = Modifier.fillMaxSize(),
-            contentAlignment = alignment // Align the inner box in the parent
+            contentAlignment = alignment
         ) {
-            // Inner Box with size constraints and padding
             Box(
                 modifier = Modifier
                     .sizeIn(maxWidth = constrainedWidth)
