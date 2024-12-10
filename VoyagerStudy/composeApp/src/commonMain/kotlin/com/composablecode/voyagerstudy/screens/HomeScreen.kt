@@ -11,6 +11,7 @@ import androidx.compose.material.DrawerState
 import androidx.compose.material.DrawerValue
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ModalDrawer
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -26,6 +27,7 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.composablecode.voyagerstudy.components.DrawerItem
+import com.composablecode.voyagerstudy.designToken.customColors
 import com.composablecode.voyagerstudy.responsive.AdaptiveScreen
 import com.composablecode.voyagerstudy.responsive.mediaQueryProvider
 import kotlinx.coroutines.launch
@@ -42,6 +44,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 private fun onMobile() {
     TabNavigator(HomeTab) {
         Scaffold(
+            backgroundColor = MaterialTheme.customColors().gray,
             content = {
                 CurrentTab()
             },

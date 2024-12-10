@@ -1,3 +1,4 @@
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -13,7 +14,7 @@ import cafe.adriel.voyager.navigator.tab.TabOptions
 object HomeTab : Tab {
     @Composable
     override fun Content() {
-        Text("Welcome to Home Tab!")
+        Text("Welcome to Home Tab!", style = MaterialTheme.typography.h1)
     }
 
     override val options: TabOptions

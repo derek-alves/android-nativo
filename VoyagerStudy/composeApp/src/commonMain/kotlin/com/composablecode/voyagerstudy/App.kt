@@ -1,10 +1,13 @@
 package com.composablecode.voyagerstudy
 
 
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
+import com.composablecode.voyagerstudy.data.jsonString
+import com.composablecode.voyagerstudy.designToken.AppTheme
+import com.composablecode.voyagerstudy.designToken.DesignSystemManager
 import com.composablecode.voyagerstudy.responsive.Breakpoint
 import com.composablecode.voyagerstudy.responsive.MaxWidthBox
 import com.composablecode.voyagerstudy.responsive.ResponsiveLayout
@@ -16,7 +19,11 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 @Preview
 fun App() {
-    MaterialTheme {
+    val designSystemManager = remember {
+        DesignSystemManager(jsonString)
+    }
+
+    AppTheme(designSystemManager) {
         ResponsiveLayout(
             breakpoints = listOf(
                 Breakpoint(start = 0.0, end = 450.0, type = BreakPointPlatform.MOBILE),
