@@ -1,8 +1,6 @@
-package com.composablecode.voyagerstudy.screens
+package com.composablecode.voyagerstudy.screens.home
 
-import HomeTab
-import ProfileTab
-import SettingsTab
+
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.BottomNavigation
@@ -30,6 +28,9 @@ import com.composablecode.voyagerstudy.components.DrawerItem
 import com.composablecode.voyagerstudy.designToken.customColors
 import com.composablecode.voyagerstudy.responsive.AdaptiveScreen
 import com.composablecode.voyagerstudy.responsive.mediaQueryProvider
+import com.composablecode.voyagerstudy.screens.home.tab.HomeTab
+import com.composablecode.voyagerstudy.screens.home.tab.ProfileTab
+import com.composablecode.voyagerstudy.screens.home.tab.SettingsTab
 import kotlinx.coroutines.launch
 
 @Composable

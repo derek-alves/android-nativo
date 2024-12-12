@@ -1,4 +1,9 @@
+package com.composablecode.voyagerstudy.screens.home.tab
+
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -6,15 +11,23 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import com.composablecode.voyagerstudy.designToken.spacings
 
 
 object HomeTab : Tab {
     @Composable
     override fun Content() {
-        Text("Welcome to Home Tab!", style = MaterialTheme.typography.h1)
+        Scaffold(
+            modifier = Modifier.fillMaxSize().padding(MaterialTheme.spacings().md),
+            content = {
+                Text("Welcome to Home Tab!", style = MaterialTheme.typography.h1)
+            }
+        )
+
     }
 
     override val options: TabOptions
