@@ -12,7 +12,7 @@ import com.composablecode.voyagerstudy.responsive.Breakpoint
 import com.composablecode.voyagerstudy.responsive.MaxWidthBox
 import com.composablecode.voyagerstudy.responsive.ResponsiveLayout
 import com.composablecode.voyagerstudy.responsive.utils.BreakPointPlatform
-import com.composablecode.voyagerstudy.screens.HomeScreen
+import com.composablecode.voyagerstudy.screens.home.HomeScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
