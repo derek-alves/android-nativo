@@ -6,8 +6,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import com.composablecode.voyagerstudy.data.jsonString
-import com.composablecode.voyagerstudy.designToken.AppTheme
-import com.composablecode.voyagerstudy.designToken.DesignSystemManager
+import com.composablecode.voyagerstudy.designSystem.AppTheme
+import com.composablecode.voyagerstudy.designSystem.DesignSystemManager
 import com.composablecode.voyagerstudy.responsive.Breakpoint
 import com.composablecode.voyagerstudy.responsive.MaxWidthBox
 import com.composablecode.voyagerstudy.responsive.ResponsiveLayout

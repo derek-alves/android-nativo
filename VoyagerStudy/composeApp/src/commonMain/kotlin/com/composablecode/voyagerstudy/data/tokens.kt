@@ -25,16 +25,17 @@ val jsonString = """
     }
   },
   "spacing": {
-    "xs": 4,
+    "xxs": 4,
+    "xs": 6,
     "sm": 8,
     "md": 12,
     "lg": 16,
     "xl": 20,
-    "2xl": 24,
-    "3xl": 28,
-    "4xl": 32,
-    "5xl": 36,
-    "6xl": 40
+    "xxl": 24,
+    "xxxl": 28,
+    "xxxxl": 32,
+    "xxxxxl": 36,
+    "xxxxxxl": 40
   },
   "font": {
     "vt323 font": {

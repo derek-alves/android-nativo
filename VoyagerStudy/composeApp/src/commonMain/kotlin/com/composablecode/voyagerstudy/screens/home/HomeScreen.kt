@@ -25,7 +25,7 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.composablecode.voyagerstudy.components.DrawerItem
-import com.composablecode.voyagerstudy.designToken.customColors
+import com.composablecode.voyagerstudy.designSystem.customColors
 import com.composablecode.voyagerstudy.responsive.AdaptiveScreen
 import com.composablecode.voyagerstudy.responsive.mediaQueryProvider
 import com.composablecode.voyagerstudy.screens.home.tab.HomeTab

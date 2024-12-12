@@ -74,6 +74,7 @@ kotlin {
             implementation(libs.voyager.tabNavigator)
             implementation(libs.voyager.bottomSheetNavigator)
             implementation(libs.kotlinx.serialization.json)
+            implementation(libs.coil.compose)
 
 
         }

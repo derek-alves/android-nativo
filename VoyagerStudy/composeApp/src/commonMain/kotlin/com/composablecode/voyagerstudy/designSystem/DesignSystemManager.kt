@@ -1,4 +1,4 @@
-package com.composablecode.voyagerstudy.designToken
+package com.composablecode.voyagerstudy.designSystem
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -25,6 +25,7 @@ data class TokenColor(val value: String)
 
 @Serializable
 data class Spacing(
+    val xxs: Int = 0,
     val xs: Int = 0,
     val sm: Int = 0,
     val md: Int = 0,

@@ -1,4 +1,4 @@
-package com.composablecode.voyagerstudy.designToken
+package com.composablecode.voyagerstudy.designSystem
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Typography
@@ -7,8 +7,6 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 
 val LocalSpacing = staticCompositionLocalOf<Spacing> { Spacing() }
 
@@ -67,34 +65,7 @@ fun MaterialTheme.customColors(): AppColors {
     )
 }
 
-data class DpSpacing(
-    val xs: Dp,
-    val sm: Dp,
-    val md: Dp,
-    val lg: Dp,
-    val xl: Dp,
-    val xxl: Dp,
-    val xxxl: Dp,
-    val xxxxl: Dp,
-    val xxxxxl: Dp,
-    val xxxxxxl: Dp
-)
 
-@Composable
-fun MaterialTheme.spacings(): DpSpacing {
-    return DpSpacing(
-        xs = LocalSpacing.current.xs.dp,
-        sm = LocalSpacing.current.sm.dp,
-        md = LocalSpacing.current.md.dp,
-        lg = LocalSpacing.current.lg.dp,
-        xl = LocalSpacing.current.xl.dp,
-        xxl = LocalSpacing.current.xxl.dp,
-        xxxl = LocalSpacing.current.xxxl.dp,
-        xxxxl = LocalSpacing.current.xxxxl.dp,
-        xxxxxl = LocalSpacing.current.xxxxxl.dp,
-        xxxxxxl = LocalSpacing.current.xxxxxxl.dp,
-    )
-}
 
 
 

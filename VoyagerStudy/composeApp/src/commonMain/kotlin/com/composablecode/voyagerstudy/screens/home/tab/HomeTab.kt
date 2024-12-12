@@ -1,5 +1,6 @@
 package com.composablecode.voyagerstudy.screens.home.tab
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
@@ -15,7 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import com.composablecode.voyagerstudy.designToken.spacings
+import com.composablecode.voyagerstudy.designSystem.AppIcon
+import com.composablecode.voyagerstudy.designSystem.components.ButtonPrimary
+import com.composablecode.voyagerstudy.designSystem.spacings
 
 
 object HomeTab : Tab {
@@ -24,7 +27,11 @@ object HomeTab : Tab {
         Scaffold(
             modifier = Modifier.fillMaxSize().padding(MaterialTheme.spacings().md),
             content = {
-                Text("Welcome to Home Tab!", style = MaterialTheme.typography.h1)
+                Column {
+                    Text("Welcome to Home Tab!", style = MaterialTheme.typography.h2)
+                    ButtonPrimary(leadIcon = AppIcon.Home) { }
+                }
+
             }
         )
 
