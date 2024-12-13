@@ -30,7 +30,8 @@ object HomeTab : Tab {
             modifier = Modifier.fillMaxSize().padding(MaterialTheme.spacings().md),
             content = {
                 Column {
-                    Text("Welcome to Home Tab!", style = MaterialTheme.typography.h2)
+                    Text("HOME TABBBBB!", style = MaterialTheme.typography.h2)
+                    Text("HOME TABBBBB!", style = MaterialTheme.typography.h2)
                     ButtonPrimary(leadIcon = AppIcon.Home) { }
                     Spacer(modifier = Modifier.height(16.dp))
                     ButtonIcon(icon = AppIcon.Home) {

@@ -44,16 +44,20 @@ import com.composablecode.voyagerstudy.screens.home.tab.NotificationTab
 import com.composablecode.voyagerstudy.screens.home.tab.SearchTab
 import kotlinx.coroutines.launch
 
+class StateHome{}
+
+
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
     AdaptiveScreen(
-        onMobile = { onMobile() },
-        onTablet = { onTablet() },
+        state = StateHome(),
+        onMobile = { it -> onMobile(it) },
+        onTablet = {it -> onTablet(it) },
     )
 }
 
 @Composable
-private fun onMobile() {
+private fun onMobile(state:StateHome) {
     TabNavigator(HomeTab) {
         Scaffold(
             backgroundColor = MaterialTheme.customColors().gray,
@@ -67,7 +71,6 @@ private fun onMobile() {
                     backgroundColor = MaterialTheme.customColors().grayMedium,
                     modifier = Modifier
                         .drawBehind {
-
                             val strokeWidth = commonSpacing.toPx()
                             drawLine(
                                 color = Color.Black,
@@ -97,7 +100,7 @@ private fun onMobile() {
 }
 
 @Composable
-fun onTablet() {
+fun onTablet(state:StateHome) {
     val mediaQuery = mediaQueryProvider.current
     val scope = rememberCoroutineScope()
     val drawerState = remember { DrawerState(DrawerValue.Closed) }

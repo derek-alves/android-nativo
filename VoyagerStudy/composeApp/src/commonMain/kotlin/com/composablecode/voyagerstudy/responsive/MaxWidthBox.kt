@@ -25,7 +25,6 @@ fun MaxWidthBox(
     BoxWithConstraints(
         modifier = Modifier.fillMaxSize()
     ) {
-        // Calculate constrained width
         val constrainedWidth =
             maxWidth?.let { minOf(it, constraints.maxWidth.toDp(Density(1.5f))) }
                 ?: constraints.maxWidth.toDp(Density(1.5f))
