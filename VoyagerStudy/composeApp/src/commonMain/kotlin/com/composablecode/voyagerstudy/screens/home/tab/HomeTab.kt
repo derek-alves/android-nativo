@@ -18,6 +18,7 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.composablecode.voyagerstudy.designSystem.AppIcon
 import com.composablecode.voyagerstudy.designSystem.components.ButtonPrimary
+import com.composablecode.voyagerstudy.designSystem.components.IconButton
 import com.composablecode.voyagerstudy.designSystem.spacings
 
 
@@ -30,6 +31,9 @@ object HomeTab : Tab {
                 Column {
                     Text("Welcome to Home Tab!", style = MaterialTheme.typography.h2)
                     ButtonPrimary(leadIcon = AppIcon.Home) { }
+                    IconButton(icon = AppIcon.Home) {
+
+                    }
                 }
 
             }
