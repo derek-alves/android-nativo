@@ -1,4 +1,4 @@
-package com.composablecode.voyagerstudy.screens.home
+package com.composablecode.voyagerstudy.presentation.screens.home
 
 
 import androidx.compose.foundation.layout.Arrangement
@@ -31,17 +31,17 @@ import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import com.composablecode.voyagerstudy.components.DrawerItem
+import com.composablecode.voyagerstudy.presentation.components.DrawerItem
 import com.composablecode.voyagerstudy.designSystem.AppIcon
 import com.composablecode.voyagerstudy.designSystem.components.ButtonIcon
 import com.composablecode.voyagerstudy.designSystem.customColors
 import com.composablecode.voyagerstudy.designSystem.spacings
 import com.composablecode.voyagerstudy.responsive.AdaptiveScreen
 import com.composablecode.voyagerstudy.responsive.mediaQueryProvider
-import com.composablecode.voyagerstudy.screens.home.tab.HomeTab
-import com.composablecode.voyagerstudy.screens.home.tab.MailTab
-import com.composablecode.voyagerstudy.screens.home.tab.NotificationTab
-import com.composablecode.voyagerstudy.screens.home.tab.SearchTab
+import com.composablecode.voyagerstudy.presentation.screens.home.tab.HomeTab
+import com.composablecode.voyagerstudy.presentation.screens.home.tab.MailTab
+import com.composablecode.voyagerstudy.presentation.screens.home.tab.NotificationTab
+import com.composablecode.voyagerstudy.presentation.screens.home.tab.SearchTab
 import kotlinx.coroutines.launch
 
 class StateHome{}
@@ -57,7 +57,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun onMobile(state:StateHome) {
+private fun onMobile(state: StateHome) {
     TabNavigator(HomeTab) {
         Scaffold(
             backgroundColor = MaterialTheme.customColors().gray,
@@ -100,7 +100,7 @@ private fun onMobile(state:StateHome) {
 }
 
 @Composable
-fun onTablet(state:StateHome) {
+fun onTablet(state: StateHome) {
     val mediaQuery = mediaQueryProvider.current
     val scope = rememberCoroutineScope()
     val drawerState = remember { DrawerState(DrawerValue.Closed) }

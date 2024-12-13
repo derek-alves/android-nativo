@@ -26,10 +26,8 @@ fun ButtonIcon(icon: AppIcon, modifier: Modifier = Modifier, onClick: (() -> Uni
                 painter = painterResource(icon.resId),
                 contentDescription = null,
                 modifier = modifier,
-
-                )
+            )
         }
-
 
     }
 }

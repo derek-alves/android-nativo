@@ -1,4 +1,4 @@
-package com.composablecode.voyagerstudy.components
+package com.composablecode.voyagerstudy.presentation.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.material.ExperimentalMaterialApi

@@ -14,8 +14,8 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun Border(
-    verticalStroke: Dp = 3.dp,
-    horizontalStroke: Dp = 5.dp,
+    verticalStroke: Dp = 2.dp,
+    horizontalStroke: Dp = 3.dp,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
