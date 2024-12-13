@@ -23,6 +23,7 @@ fun AppTheme(designSystemManager: DesignSystemManager, content: @Composable () -
                 surface = designSystemManager.colors["dark gray"] ?: Color.Unspecified,
                 onPrimary = designSystemManager.colors["dark"] ?: Color.Unspecified,
                 onSecondary = designSystemManager.colors["light"] ?: Color.Unspecified,
+                primaryVariant = designSystemManager.colors["gray-medium"] ?: Color.Unspecified,
             ),
 
             typography = Typography(
@@ -50,6 +51,7 @@ data class AppColors(
     val dark: Color,
     val darkGray: Color,
     val gray: Color,
+    val grayMedium: Color,
     val light: Color,
     val lightGray: Color,
 )
@@ -62,6 +64,7 @@ fun MaterialTheme.customColors(): AppColors {
         gray = colors.primary,
         light = colors.onSecondary,
         lightGray = colors.secondary,
+        grayMedium = colors.primaryVariant,
     )
 }
 

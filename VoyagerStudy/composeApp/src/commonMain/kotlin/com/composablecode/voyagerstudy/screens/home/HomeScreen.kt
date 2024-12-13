@@ -1,8 +1,11 @@
 package com.composablecode.voyagerstudy.screens.home
 
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.DrawerState
@@ -20,17 +23,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.composablecode.voyagerstudy.components.DrawerItem
+import com.composablecode.voyagerstudy.designSystem.AppIcon
+import com.composablecode.voyagerstudy.designSystem.components.ButtonIcon
 import com.composablecode.voyagerstudy.designSystem.customColors
+import com.composablecode.voyagerstudy.designSystem.spacings
 import com.composablecode.voyagerstudy.responsive.AdaptiveScreen
 import com.composablecode.voyagerstudy.responsive.mediaQueryProvider
 import com.composablecode.voyagerstudy.screens.home.tab.HomeTab
-import com.composablecode.voyagerstudy.screens.home.tab.ProfileTab
-import com.composablecode.voyagerstudy.screens.home.tab.SettingsTab
+import com.composablecode.voyagerstudy.screens.home.tab.MailTab
+import com.composablecode.voyagerstudy.screens.home.tab.NotificationTab
+import com.composablecode.voyagerstudy.screens.home.tab.SearchTab
 import kotlinx.coroutines.launch
 
 @Composable
@@ -50,10 +61,34 @@ private fun onMobile() {
                 CurrentTab()
             },
             bottomBar = {
-                BottomNavigation {
-                    TabNavigationItem(HomeTab)
-                    TabNavigationItem(ProfileTab)
-                    TabNavigationItem(SettingsTab)
+                val commonSpacing = MaterialTheme.spacings().xs
+                BottomNavigation(
+                    elevation = 0.dp,
+                    backgroundColor = MaterialTheme.customColors().grayMedium,
+                    modifier = Modifier
+                        .drawBehind {
+
+                            val strokeWidth = commonSpacing.toPx()
+                            drawLine(
+                                color = Color.Black,
+                                start = Offset(0f, 0f),
+                                end = Offset(size.width, 0f),
+                                strokeWidth = strokeWidth
+                            )
+                        },
+
+                    ) {
+                    Row(
+                        modifier = Modifier
+                            .padding(vertical = commonSpacing),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                    ) {
+                        TabNavigationItem(HomeTab)
+                        TabNavigationItem(SearchTab)
+                        TabNavigationItem(NotificationTab)
+                        TabNavigationItem(MailTab)
+                    }
+
                 }
             }
         )
@@ -86,8 +121,9 @@ fun onTablet() {
                     drawerContent = {
                         Column {
                             DrawerItem(HomeTab)
-                            DrawerItem(ProfileTab)
-                            DrawerItem(SettingsTab)
+                            DrawerItem(SearchTab)
+                            DrawerItem(NotificationTab)
+                            DrawerItem(MailTab)
                         }
                     },
                     content = {
@@ -103,11 +139,19 @@ fun onTablet() {
 @Composable
 private fun RowScope.TabNavigationItem(tab: Tab) {
     val tabNavigator = LocalTabNavigator.current
-
+    val icon = when (tab.options.title) {
+        AppIcon.Home.name -> AppIcon.Home
+        AppIcon.Search.name -> AppIcon.Search
+        AppIcon.Sign.name -> AppIcon.Sign
+        AppIcon.Mail.name -> AppIcon.Mail
+        else -> {
+            AppIcon.Home
+        }
+    }
     BottomNavigationItem(
         selected = tabNavigator.current == tab,
         onClick = { tabNavigator.current = tab },
-        icon = { Icon(painter = tab.options.icon!!, contentDescription = tab.options.title) }
+        icon = { ButtonIcon(icon) },
     )
 }
 

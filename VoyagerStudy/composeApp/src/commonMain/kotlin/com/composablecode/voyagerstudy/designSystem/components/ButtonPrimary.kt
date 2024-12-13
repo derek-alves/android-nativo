@@ -1,5 +1,6 @@
 package com.composablecode.voyagerstudy.designSystem.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,9 +20,13 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun ButtonPrimary(modifier: Modifier = Modifier, leadIcon: AppIcon? = null, onClick: () -> Unit) {
+fun ButtonPrimary(
+    modifier: Modifier = Modifier,
+    leadIcon: AppIcon? = null,
+    onClick: (() -> Unit)? = null
+) {
     Border(
-        onClick = onClick
+        modifier = modifier.clickable(enabled = onClick != null) { onClick?.invoke() }
     ) {
         Row(
             modifier = modifier.fillMaxWidth().height(MaterialTheme.spacings().xxxxxl).padding(

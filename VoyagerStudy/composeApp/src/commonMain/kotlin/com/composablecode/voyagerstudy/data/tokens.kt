@@ -15,6 +15,10 @@ val jsonString = """
       "value": "#b8b8b8ff",
       "blendMode": "normal"
     },
+    "gray-medium": {
+      "value": "#C4C4C4ff",
+      "blendMode": "normal"
+    },
     "light gray": {
       "value": "#e1e1e1ff",
       "blendMode": "normal"
