@@ -52,7 +52,7 @@ fun Header(modifier: Modifier = Modifier) {
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(spacing.md)
                 ) {
-                    Avatar()
+                    Avatar(imageUrl = "drawable/images/avatar-1.png")
                     BasicTextField(
                         value = text,
                         onValueChange = { text = it },

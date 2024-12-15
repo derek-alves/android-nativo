@@ -2,9 +2,7 @@ package com.composablecode.voyagerstudy.presentation.screens.home.tab
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -16,13 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import com.composablecode.voyagerstudy.Tweet
 import com.composablecode.voyagerstudy.designSystem.AppIcon
-import com.composablecode.voyagerstudy.designSystem.components.ButtonIcon
-import com.composablecode.voyagerstudy.designSystem.components.ButtonPrimary
-import com.composablecode.voyagerstudy.designSystem.components.ButtonType
 import com.composablecode.voyagerstudy.designSystem.spacings
 import com.composablecode.voyagerstudy.presentation.components.AppBar
 import com.composablecode.voyagerstudy.presentation.components.Header
+import com.composablecode.voyagerstudy.presentation.components.TweetCard
 
 
 object HomeTab : Tab {
@@ -38,11 +35,18 @@ object HomeTab : Tab {
                     modifier = Modifier.padding(horizontal = MaterialTheme.spacings().lg),
                     verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacings().lg)
                 ) {
-                    Spacer(modifier = Modifier.height(MaterialTheme.spacings().lg))
+
                     Header()
-                    ButtonPrimary(text = "Home", leadIcon = AppIcon.Home) { }
-                    ButtonIcon(icon = AppIcon.Home)
-                    ButtonPrimary(text = "Edit Profile", type = ButtonType.Wrap) { }
+                    TweetCard(
+                        tweet = Tweet(
+                            text = "Amet habitant mollis adipiscing pretium scelerisque urna euismod nec nullam.",
+                            id = "any-id",
+                            image = "drawable/images/avatar-5.png",
+                            likeQty = 3,
+                            userName = "Tommy Blue",
+                            identifier = "@tommy_blue"
+                        )
+                    )
 
                 }
 

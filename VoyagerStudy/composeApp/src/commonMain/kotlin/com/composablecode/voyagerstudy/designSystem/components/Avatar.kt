@@ -19,7 +19,8 @@ import voyagerstudy.composeapp.generated.resources.Res
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun Avatar(
-    size: Dp = MaterialTheme.spacings().xxxxxxl + MaterialTheme.spacings().sm
+    size: Dp = MaterialTheme.spacings().xxxxxxl + MaterialTheme.spacings().sm,
+    imageUrl: String,
 ) {
     AsyncImage(
         modifier = Modifier.border(
@@ -28,7 +29,7 @@ fun Avatar(
             shape = CircleShape
         ).size(size)
             .clip(CircleShape),
-        model = Res.getUri("drawable/images/avatar-1.png"),
+        model = Res.getUri(imageUrl),
         contentDescription = "any",
     )
 }

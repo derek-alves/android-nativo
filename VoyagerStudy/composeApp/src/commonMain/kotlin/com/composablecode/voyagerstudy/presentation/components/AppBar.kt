@@ -45,7 +45,9 @@ fun AppBar(modifier: Modifier = Modifier) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Avatar()
+            Avatar(
+                imageUrl = "drawable/images/avatar-1.png"
+            )
             ButtonIcon(
                 icon = AppIcon.OpenPoints
             )
