@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
@@ -17,6 +18,7 @@ import com.composablecode.voyagerstudy.designSystem.AppIcon
 import com.composablecode.voyagerstudy.designSystem.components.Avatar
 import com.composablecode.voyagerstudy.designSystem.components.Border
 import com.composablecode.voyagerstudy.designSystem.components.ButtonIcon
+import com.composablecode.voyagerstudy.designSystem.customColors
 import com.composablecode.voyagerstudy.designSystem.spacings
 
 @Composable
@@ -39,11 +41,19 @@ fun TweetCard(modifier: Modifier = Modifier, tweet: Tweet) {
                 verticalArrangement = Arrangement.Top
             ) {
                 Row {
-                    Text(text = tweet.userName)
-                    Text(text = tweet.identifier)
+                    Text(text = tweet.userName, style = MaterialTheme.typography.h6)
+                    Spacer(modifier = Modifier.width(spacing.xxs))
+                    Text(
+                        text = tweet.identifier,
+                        style = MaterialTheme.typography.h6.copy(color = MaterialTheme.customColors().darkGray)
+                    )
                 }
-                Text(text = tweet.text)
-                Row {
+                Spacer(modifier = Modifier.height(spacing.xs))
+                Text(text = tweet.text, style = MaterialTheme.typography.h6)
+                Spacer(modifier = Modifier.height(spacing.md))
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(spacing.md)
+                ) {
                     ButtonIcon(icon = AppIcon.Chat)
                     ButtonIcon(icon = AppIcon.Data)
                     ButtonIcon(icon = AppIcon.Hearth)

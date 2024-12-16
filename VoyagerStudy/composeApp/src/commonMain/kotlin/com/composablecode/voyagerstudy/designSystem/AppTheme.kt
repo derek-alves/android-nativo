@@ -29,16 +29,22 @@ fun AppTheme(designSystemManager: DesignSystemManager, content: @Composable () -
             typography = Typography(
                 defaultFontFamily = designSystemManager.DesignSystemFont(),
                 h1 = designSystemManager.typography["vt323 font"]?.get("xxl")
+                    ?.copy(color = designSystemManager.colors["dark"] ?: Color.Unspecified)
                     ?: TextStyle.Default,
                 h2 = designSystemManager.typography["vt323 font"]?.get("xl")
+                    ?.copy(color = designSystemManager.colors["dark"] ?: Color.Unspecified)
                     ?: TextStyle.Default,
                 h3 = designSystemManager.typography["vt323 font"]?.get("l")
+                    ?.copy(color = designSystemManager.colors["dark"] ?: Color.Unspecified)
                     ?: TextStyle.Default,
                 h4 = designSystemManager.typography["vt323 font"]?.get("m")
+                    ?.copy(color = designSystemManager.colors["dark"] ?: Color.Unspecified)
                     ?: TextStyle.Default,
                 h5 = designSystemManager.typography["vt323 font"]?.get("s")
+                    ?.copy(color = designSystemManager.colors["dark"] ?: Color.Unspecified)
                     ?: TextStyle.Default,
                 h6 = designSystemManager.typography["vt323 font"]?.get("xs")
+                    ?.copy(color = designSystemManager.colors["dark"] ?: Color.Unspecified)
                     ?: TextStyle.Default,
             ),
             content = content
