@@ -2,6 +2,7 @@ package com.composablecode.voyagerstudy.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,7 +20,11 @@ import com.composablecode.voyagerstudy.designSystem.components.ButtonIcon
 import com.composablecode.voyagerstudy.designSystem.spacings
 
 @Composable
-fun AppBar(modifier: Modifier = Modifier) {
+fun AppBar(
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(horizontal = MaterialTheme.spacings().md),
+    content: (@Composable () -> Unit)? = null
+) {
     Box(
         modifier = modifier.drawBehind {
             val strokeWidth = 2.dp.toPx()
@@ -45,9 +50,26 @@ fun AppBar(modifier: Modifier = Modifier) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Avatar(
-                imageUrl = "drawable/images/avatar-1.png"
-            )
+            Row(
+                modifier = modifier.weight(1f),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Avatar(
+                    imageUrl = "drawable/images/avatar-1.png"
+                )
+                if (content != null) {
+                    Box(
+                        modifier = modifier
+                            .padding(
+                                contentPadding
+                            )
+
+                    ) {
+                        content.invoke()
+                    }
+                }
+            }
+
             ButtonIcon(
                 icon = AppIcon.OpenPoints
             )

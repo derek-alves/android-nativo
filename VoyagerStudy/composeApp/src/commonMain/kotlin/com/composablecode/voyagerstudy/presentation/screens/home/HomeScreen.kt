@@ -2,9 +2,11 @@ package com.composablecode.voyagerstudy.presentation.screens.home
 
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -31,20 +33,20 @@ import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import com.composablecode.voyagerstudy.presentation.components.DrawerItem
 import com.composablecode.voyagerstudy.designSystem.AppIcon
 import com.composablecode.voyagerstudy.designSystem.components.ButtonIcon
 import com.composablecode.voyagerstudy.designSystem.customColors
 import com.composablecode.voyagerstudy.designSystem.spacings
-import com.composablecode.voyagerstudy.responsive.AdaptiveScreen
-import com.composablecode.voyagerstudy.responsive.mediaQueryProvider
+import com.composablecode.voyagerstudy.presentation.components.DrawerItem
 import com.composablecode.voyagerstudy.presentation.screens.home.tab.HomeTab
 import com.composablecode.voyagerstudy.presentation.screens.home.tab.MailTab
 import com.composablecode.voyagerstudy.presentation.screens.home.tab.NotificationTab
 import com.composablecode.voyagerstudy.presentation.screens.home.tab.SearchTab
+import com.composablecode.voyagerstudy.responsive.AdaptiveScreen
+import com.composablecode.voyagerstudy.responsive.mediaQueryProvider
 import kotlinx.coroutines.launch
 
-class StateHome{}
+class StateHome {}
 
 
 @Composable
@@ -52,17 +54,20 @@ fun HomeScreen(modifier: Modifier = Modifier) {
     AdaptiveScreen(
         state = StateHome(),
         onMobile = { it -> onMobile(it) },
-        onTablet = {it -> onTablet(it) },
+        onTablet = { it -> onTablet(it) },
     )
 }
 
 @Composable
 private fun onMobile(state: StateHome) {
-    TabNavigator(HomeTab) {
+    TabNavigator(SearchTab) {
         Scaffold(
             backgroundColor = MaterialTheme.customColors().gray,
             content = {
-                CurrentTab()
+                Box(modifier = Modifier.padding(it).fillMaxSize()) {
+                    CurrentTab()
+                }
+
             },
             bottomBar = {
                 val commonSpacing = MaterialTheme.spacings().xs
