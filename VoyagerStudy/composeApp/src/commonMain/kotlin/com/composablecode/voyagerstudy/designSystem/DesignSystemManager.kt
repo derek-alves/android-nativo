@@ -25,6 +25,7 @@ data class TokenColor(val value: String)
 
 @Serializable
 data class Spacing(
+    val xxxs: Int = 0,
     val xxs: Int = 0,
     val xs: Int = 0,
     val sm: Int = 0,

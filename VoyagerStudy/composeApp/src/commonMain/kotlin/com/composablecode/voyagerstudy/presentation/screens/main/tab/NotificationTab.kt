@@ -1,4 +1,4 @@
-package com.composablecode.voyagerstudy.presentation.screens.home.tab
+package com.composablecode.voyagerstudy.presentation.screens.main.tab
 
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -10,16 +10,16 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.composablecode.voyagerstudy.designSystem.AppIcon
 
-object MailTab : Tab {
+object NotificationTab : Tab {
     @Composable
     override fun Content() {
-        Text("Mail are here.")
+        Text("Notification are here.")
     }
 
     override val options: TabOptions
         @Composable
         get() {
-            val title = AppIcon.Mail.name
+            val title = AppIcon.Sign.name
             val icon = rememberVectorPainter(Icons.Default.Settings)
 
             return remember {

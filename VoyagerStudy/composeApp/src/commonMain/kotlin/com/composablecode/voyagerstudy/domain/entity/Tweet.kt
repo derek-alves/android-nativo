@@ -1,7 +1,6 @@
-package com.composablecode.voyagerstudy
+package com.composablecode.voyagerstudy.domain.entity
 
 import kotlinx.serialization.Serializable
-
 
 @Serializable
 data class Tweet(

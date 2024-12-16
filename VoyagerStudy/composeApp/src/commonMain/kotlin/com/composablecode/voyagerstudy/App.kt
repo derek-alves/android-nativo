@@ -8,11 +8,11 @@ import androidx.compose.ui.unit.dp
 import com.composablecode.voyagerstudy.data.jsonString
 import com.composablecode.voyagerstudy.designSystem.AppTheme
 import com.composablecode.voyagerstudy.designSystem.DesignSystemManager
+import com.composablecode.voyagerstudy.presentation.screens.main.home.HomeScreen
 import com.composablecode.voyagerstudy.responsive.Breakpoint
 import com.composablecode.voyagerstudy.responsive.MaxWidthBox
 import com.composablecode.voyagerstudy.responsive.ResponsiveLayout
 import com.composablecode.voyagerstudy.responsive.utils.BreakPointPlatform
-import com.composablecode.voyagerstudy.presentation.screens.home.HomeScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 

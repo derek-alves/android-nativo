@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
  * @property xxxxxxl 40
  */
 data class DpSpacing(
+    val xxxs: Dp,
     val xxs: Dp,
     val xs: Dp,
     val sm: Dp,
@@ -50,6 +51,7 @@ data class DpSpacing(
 @Composable
 fun MaterialTheme.spacings(): DpSpacing {
     return DpSpacing(
+        xxxs = LocalSpacing.current.xxxs.dp,
         xxs = LocalSpacing.current.xxs.dp,
         xs = LocalSpacing.current.xs.dp,
         sm = LocalSpacing.current.sm.dp,

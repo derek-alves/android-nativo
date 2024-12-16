@@ -13,13 +13,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.composablecode.voyagerstudy.Tweet
 import com.composablecode.voyagerstudy.designSystem.AppIcon
 import com.composablecode.voyagerstudy.designSystem.components.Avatar
 import com.composablecode.voyagerstudy.designSystem.components.Border
 import com.composablecode.voyagerstudy.designSystem.components.ButtonIcon
 import com.composablecode.voyagerstudy.designSystem.customColors
 import com.composablecode.voyagerstudy.designSystem.spacings
+import com.composablecode.voyagerstudy.domain.entity.Tweet
 
 @Composable
 fun TweetCard(modifier: Modifier = Modifier, tweet: Tweet) {

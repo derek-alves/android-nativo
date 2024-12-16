@@ -1,4 +1,4 @@
-package com.composablecode.voyagerstudy.presentation.screens
+package com.composablecode.voyagerstudy.presentation.screens.main.tab
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,8 +15,9 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.composablecode.voyagerstudy.presentation.screens.ScreenB
 
-class ScreenA :Screen{
+class ScreenA : Screen {
 
     @Composable
     override fun Content() {
@@ -28,7 +29,7 @@ class ScreenA :Screen{
         ) {
             Text("Screen A")
             OutlinedTextField(
-                value ="Value" ,
+                value = "Value",
                 onValueChange = {
 
                 },

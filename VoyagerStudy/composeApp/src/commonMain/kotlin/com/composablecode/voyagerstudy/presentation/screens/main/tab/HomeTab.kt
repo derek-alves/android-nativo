@@ -1,4 +1,4 @@
-package com.composablecode.voyagerstudy.presentation.screens.home.tab
+package com.composablecode.voyagerstudy.presentation.screens.main.tab
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,9 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import com.composablecode.voyagerstudy.Tweet
 import com.composablecode.voyagerstudy.designSystem.AppIcon
 import com.composablecode.voyagerstudy.designSystem.spacings
+import com.composablecode.voyagerstudy.domain.entity.Tweet
 import com.composablecode.voyagerstudy.presentation.components.AppBar
 import com.composablecode.voyagerstudy.presentation.components.Header
 import com.composablecode.voyagerstudy.presentation.components.TweetCard

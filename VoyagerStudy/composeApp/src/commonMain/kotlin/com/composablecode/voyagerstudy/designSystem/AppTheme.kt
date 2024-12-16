@@ -46,6 +46,9 @@ fun AppTheme(designSystemManager: DesignSystemManager, content: @Composable () -
                 h6 = designSystemManager.typography["vt323 font"]?.get("xs")
                     ?.copy(color = designSystemManager.colors["dark"] ?: Color.Unspecified)
                     ?: TextStyle.Default,
+                subtitle1 = designSystemManager.typography["vt323 font"]?.get("xxs")
+                    ?.copy(color = designSystemManager.colors["dark"] ?: Color.Unspecified)
+                    ?: TextStyle.Default,
             ),
             content = content
         )

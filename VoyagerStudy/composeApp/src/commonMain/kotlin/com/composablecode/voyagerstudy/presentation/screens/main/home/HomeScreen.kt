@@ -1,4 +1,4 @@
-package com.composablecode.voyagerstudy.presentation.screens.home
+package com.composablecode.voyagerstudy.presentation.screens.main.home
 
 
 import androidx.compose.foundation.layout.Arrangement
@@ -38,10 +38,10 @@ import com.composablecode.voyagerstudy.designSystem.components.ButtonIcon
 import com.composablecode.voyagerstudy.designSystem.customColors
 import com.composablecode.voyagerstudy.designSystem.spacings
 import com.composablecode.voyagerstudy.presentation.components.DrawerItem
-import com.composablecode.voyagerstudy.presentation.screens.home.tab.HomeTab
-import com.composablecode.voyagerstudy.presentation.screens.home.tab.MailTab
-import com.composablecode.voyagerstudy.presentation.screens.home.tab.NotificationTab
-import com.composablecode.voyagerstudy.presentation.screens.home.tab.SearchTab
+import com.composablecode.voyagerstudy.presentation.screens.main.tab.HomeTab
+import com.composablecode.voyagerstudy.presentation.screens.main.tab.MailTab
+import com.composablecode.voyagerstudy.presentation.screens.main.tab.NotificationTab
+import com.composablecode.voyagerstudy.presentation.screens.main.tab.SearchTab
 import com.composablecode.voyagerstudy.responsive.AdaptiveScreen
 import com.composablecode.voyagerstudy.responsive.mediaQueryProvider
 import kotlinx.coroutines.launch
@@ -67,10 +67,9 @@ private fun onMobile(state: StateHome) {
                 Box(modifier = Modifier.padding(it).fillMaxSize()) {
                     CurrentTab()
                 }
-
             },
             bottomBar = {
-                val commonSpacing = MaterialTheme.spacings().xs
+                val commonSpacing = MaterialTheme.spacings().xxs
                 BottomNavigation(
                     elevation = 0.dp,
                     backgroundColor = MaterialTheme.customColors().grayMedium,
