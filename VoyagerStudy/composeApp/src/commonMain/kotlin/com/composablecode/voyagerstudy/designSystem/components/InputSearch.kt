@@ -1,13 +1,10 @@
 package com.composablecode.voyagerstudy.designSystem.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -37,7 +34,6 @@ fun InputSearch(
     var text by remember { mutableStateOf("") }
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         BasicTextField(
@@ -51,8 +47,8 @@ fun InputSearch(
             cursorBrush = SolidColor(Color.Black),
             decorationBox = { innerTextField ->
                 Box(
-                    modifier = Modifier.fillMaxSize().padding(start = spacings.sm),
-                    contentAlignment = Alignment.CenterStart // Center both vertically and horizontally
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.CenterStart
                 ) {
                     if (text.isEmpty()) {
                         Text(label, style = MaterialTheme.typography.h6)
@@ -61,21 +57,22 @@ fun InputSearch(
                 }
 
             },
-            modifier = modifier.drawBehind {
-                drawLine(
-                    color = Color.Black.copy(alpha = 0.8f),
-                    start = Offset(0f, 0f),
-                    end = Offset(size.width, 0f),
-                    strokeWidth = spacings.xxs.toPx()
-                )
-                drawLine(
-                    color = Color.Black.copy(alpha = 0.8f),
-                    start = Offset(0f, 0f),
-                    end = Offset(0f, size.height),
-                    strokeWidth = spacings.xxs.toPx()
-                )
+            modifier = modifier
+                .fillMaxWidth().height(spacings.xxxxxl + 2.dp).drawBehind {
+                    drawLine(
+                        color = Color.Black.copy(alpha = 0.8f),
+                        start = Offset(0f, 0f),
+                        end = Offset(size.width, 0f),
+                        strokeWidth = spacings.xxs.toPx()
+                    )
+                    drawLine(
+                        color = Color.Black.copy(alpha = 0.8f),
+                        start = Offset(0f, 0f),
+                        end = Offset(0f, size.height),
+                        strokeWidth = spacings.xxs.toPx()
+                    )
 
-            }.height(spacings.xxxxxl + 2.dp).background(Color.White).weight(1f)
+                }.background(Color.White).weight(1f)
         )
         ButtonIcon(
             icon = AppIcon.Search

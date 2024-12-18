@@ -1,7 +1,8 @@
 package com.composablecode.voyagerstudy.presentation.screens.main.search
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,8 +14,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.composablecode.voyagerstudy.designSystem.AppIcon
+import com.composablecode.voyagerstudy.designSystem.components.Avatar
 import com.composablecode.voyagerstudy.designSystem.components.Border
+import com.composablecode.voyagerstudy.designSystem.components.ButtonIcon
 import com.composablecode.voyagerstudy.designSystem.components.InputSearch
 import com.composablecode.voyagerstudy.designSystem.spacings
 import com.composablecode.voyagerstudy.domain.entity.Trend
@@ -34,17 +39,34 @@ fun SearchScreen() {
     Scaffold(
         topBar = {
             AppBar(
-                contentPadding = PaddingValues(
-                    start = spacing.md,
-                    end = spacing.xxxl
-                )
-            ) {
-                InputSearch(
-                    label = "Search Twitter",
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                content = {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
 
-                    ) { it ->
+                        ) {
+                        Avatar(
+                            imageUrl = "drawable/images/avatar-1.png"
+                        )
+                        InputSearch(
+                            label = "Search Twitter",
+                            modifier = Modifier.padding(
+                                start = MaterialTheme.spacings().lg,
+                                end = MaterialTheme.spacings().xxl
+                            ),
+                            onValueChange = {}
+                        )
+
+                    }
+
+                },
+                trailing = {
+                    ButtonIcon(
+                        icon = AppIcon.OpenPoints
+                    )
                 }
-            }
+            )
         },
         modifier = Modifier.fillMaxSize(),
         content = {

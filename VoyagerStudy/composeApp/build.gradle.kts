@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
 
 }
 
@@ -56,6 +57,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -75,10 +77,24 @@ kotlin {
             implementation(libs.voyager.bottomSheetNavigator)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.coil.compose)
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose.viewmodel)
+            api(libs.koin.annotations)
+        }
 
+        dependencies {
+            add("kspCommonMainMetadata", libs.koin.ksp.compiler)
+            add("kspAndroid", libs.koin.ksp.compiler)
+            add("kspIosX64", libs.koin.ksp.compiler)
+            add("kspIosArm64", libs.koin.ksp.compiler)
+            add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
+        }
 
+        sourceSets.named("commonMain").configure {
+            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
         }
     }
+
 }
 
 android {

@@ -8,12 +8,14 @@ import androidx.compose.ui.unit.dp
 import com.composablecode.voyagerstudy.data.jsonString
 import com.composablecode.voyagerstudy.designSystem.AppTheme
 import com.composablecode.voyagerstudy.designSystem.DesignSystemManager
-import com.composablecode.voyagerstudy.presentation.screens.main.home.HomeScreen
+import com.composablecode.voyagerstudy.di.viewModelModule
+import com.composablecode.voyagerstudy.presentation.screens.main.MainScreen
 import com.composablecode.voyagerstudy.responsive.Breakpoint
 import com.composablecode.voyagerstudy.responsive.MaxWidthBox
 import com.composablecode.voyagerstudy.responsive.ResponsiveLayout
 import com.composablecode.voyagerstudy.responsive.utils.BreakPointPlatform
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.KoinApplication
 
 
 @Composable
@@ -24,6 +26,7 @@ fun App() {
     }
 
     AppTheme(designSystemManager) {
+
         ResponsiveLayout(
             breakpoints = listOf(
                 Breakpoint(start = 0.0, end = 450.0, type = BreakPointPlatform.MOBILE),
@@ -32,7 +35,14 @@ fun App() {
             )
         ) {
             MaxWidthBox(maxWidth = 900.dp, alignment = Alignment.Center) {
-                HomeScreen()
+                KoinApplication(application = {
+                    modules(
+                        viewModelModule
+                    )
+                }) {
+                    MainScreen()
+                }
+
             }
 
         }

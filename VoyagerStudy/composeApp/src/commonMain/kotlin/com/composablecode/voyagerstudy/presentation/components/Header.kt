@@ -63,7 +63,6 @@ fun Header(modifier: Modifier = Modifier) {
                             .background(Color.Transparent),
                         decorationBox = { innerTextField ->
                             if (text.text.isEmpty()) {
-
                                 Text(
                                     text = "What’s\nhappening?",
                                     style = MaterialTheme.typography.h5.copy(color = colors.darkGray),

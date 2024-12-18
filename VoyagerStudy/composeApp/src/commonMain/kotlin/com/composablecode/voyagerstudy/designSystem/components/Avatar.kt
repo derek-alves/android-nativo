@@ -1,6 +1,7 @@
 package com.composablecode.voyagerstudy.designSystem.components
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
@@ -21,6 +22,7 @@ import voyagerstudy.composeapp.generated.resources.Res
 fun Avatar(
     size: Dp = MaterialTheme.spacings().xxxxxxl + MaterialTheme.spacings().sm,
     imageUrl: String,
+    onPressed: (() -> Unit)? = null,
 ) {
     AsyncImage(
         modifier = Modifier.border(
@@ -28,7 +30,9 @@ fun Avatar(
             color = MaterialTheme.customColors().dark,
             shape = CircleShape
         ).size(size)
-            .clip(CircleShape),
+            .clip(CircleShape).clickable {
+                onPressed?.invoke()
+            },
         model = Res.getUri(imageUrl),
         contentDescription = "any",
     )

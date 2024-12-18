@@ -2,7 +2,6 @@ package com.composablecode.voyagerstudy.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,15 +13,15 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.composablecode.voyagerstudy.designSystem.AppIcon
-import com.composablecode.voyagerstudy.designSystem.components.Avatar
-import com.composablecode.voyagerstudy.designSystem.components.ButtonIcon
 import com.composablecode.voyagerstudy.designSystem.spacings
 
 @Composable
 fun AppBar(
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(horizontal = MaterialTheme.spacings().md),
+    verticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
+    horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
+    leading: @Composable (() -> Unit)? = null,
+    trailing: @Composable (() -> Unit)? = null,
     content: (@Composable () -> Unit)? = null
 ) {
     Box(
@@ -47,32 +46,36 @@ fun AppBar(
     ) {
         Row(
             modifier = modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            verticalAlignment = verticalAlignment,
+            horizontalArrangement = horizontalArrangement
         ) {
-            Row(
-                modifier = modifier.weight(1f),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Avatar(
-                    imageUrl = "drawable/images/avatar-1.png"
-                )
-                if (content != null) {
-                    Box(
-                        modifier = modifier
-                            .padding(
-                                contentPadding
-                            )
-
-                    ) {
-                        content.invoke()
-                    }
+            if (leading != null) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    leading.invoke()
                 }
             }
 
-            ButtonIcon(
-                icon = AppIcon.OpenPoints
-            )
+            if (content != null) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    content.invoke()
+                }
+            }
+
+            if (trailing != null) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    trailing.invoke()
+                }
+            }
+
         }
     }
 }
