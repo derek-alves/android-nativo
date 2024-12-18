@@ -21,10 +21,10 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -55,21 +55,34 @@ import org.koin.compose.viewmodel.koinViewModel
 fun MainScreen(modifier: Modifier = Modifier, mainViewModel: MainViewModel = koinViewModel()) {
     AdaptiveScreen(
         state = mainViewModel,
-        onMobile = { it -> onMobile(it) },
+        onMobile = { it -> onMobile(mainViewModel) },
         onTablet = { onTablet() },
     )
 }
 
 @Composable
 private fun onMobile(mainViewModel: MainViewModel) {
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val drawerState = remember { DrawerState(DrawerValue.Closed) }
+    val drawerStateValue by mainViewModel.drawerState.collectAsState()
 
-    LaunchedEffect(mainViewModel.drawerState.collectAsState().value) {
-        when (mainViewModel.drawerState.value) {
+    LaunchedEffect(drawerState.currentValue) {
+        val currentDrawerState = when (drawerState.currentValue) {
+            DrawerValue.Open -> DrawerValue.Open
+            DrawerValue.Closed -> DrawerValue.Closed
+        }
+        if (currentDrawerState != drawerStateValue) {
+            mainViewModel.setDrawerState(currentDrawerState)
+        }
+    }
+
+    LaunchedEffect(drawerStateValue) {
+        when (drawerStateValue) {
             DrawerValue.Open -> drawerState.open()
             DrawerValue.Closed -> drawerState.close()
         }
     }
+
+
     TabNavigator(SearchTab) {
         ModalDrawer(
             drawerState = drawerState,
