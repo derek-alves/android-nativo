@@ -20,8 +20,5 @@ class MainViewModel : ViewModel() {
     fun setDrawerState(drawerValue: DrawerValue) {
         _drawerState.value = drawerValue
     }
-
-    fun closeDrawer() {
-        _drawerState.value = DrawerValue.Closed
-    }
+    
 }

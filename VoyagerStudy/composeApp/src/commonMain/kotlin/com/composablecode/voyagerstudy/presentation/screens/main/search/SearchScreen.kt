@@ -25,9 +25,11 @@ import com.composablecode.voyagerstudy.designSystem.spacings
 import com.composablecode.voyagerstudy.domain.entity.Trend
 import com.composablecode.voyagerstudy.presentation.components.AppBar
 import com.composablecode.voyagerstudy.presentation.components.TrendItem
+import com.composablecode.voyagerstudy.presentation.screens.main.MainViewModel
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun SearchScreen() {
+fun SearchScreen(mainViewModel: MainViewModel = koinViewModel()) {
     val spacing = MaterialTheme.spacings()
     val trends = listOf(
         Trend("Football", "Zinedine Zidane", "10.2 B"),
@@ -47,7 +49,10 @@ fun SearchScreen() {
 
                         ) {
                         Avatar(
-                            imageUrl = "drawable/images/avatar-1.png"
+                            imageUrl = "drawable/images/avatar-1.png",
+                            onPressed = {
+                                mainViewModel.switchDrawer()
+                            }
                         )
                         InputSearch(
                             label = "Search Twitter",
