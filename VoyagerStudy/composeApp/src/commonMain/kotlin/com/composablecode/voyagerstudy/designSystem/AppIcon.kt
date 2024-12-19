@@ -6,6 +6,7 @@ import voyagerstudy.composeapp.generated.resources.arrow_up
 import voyagerstudy.composeapp.generated.resources.back
 import voyagerstudy.composeapp.generated.resources.calendar
 import voyagerstudy.composeapp.generated.resources.chat
+import voyagerstudy.composeapp.generated.resources.close
 import voyagerstudy.composeapp.generated.resources.data
 import voyagerstudy.composeapp.generated.resources.dots
 import voyagerstudy.composeapp.generated.resources.face
@@ -46,4 +47,5 @@ enum class AppIcon(val resId: DrawableResource) {
     Save(Res.drawable.save),
     PointMap(Res.drawable.point_map),
     SmallOpenPoints(Res.drawable.small_open_points),
+    Close(Res.drawable.close)
 }

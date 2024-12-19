@@ -1,5 +1,6 @@
 package com.composablecode.voyagerstudy.designSystem.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -20,7 +21,13 @@ fun ButtonIcon(icon: AppIcon, modifier: Modifier = Modifier, onClick: (() -> Uni
     ) {
         Box(
             modifier = modifier.size(MaterialTheme.spacings().xxxxl)
-                .padding(MaterialTheme.spacings().sm)
+                .padding(MaterialTheme.spacings().sm).then(
+                    if (onClick != null) {
+                        Modifier.clickable { onClick.invoke() }
+                    } else {
+                        Modifier
+                    }
+                )
         ) {
             Icon(
                 painter = painterResource(icon.resId),

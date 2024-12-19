@@ -30,9 +30,13 @@ fun Avatar(
             color = MaterialTheme.customColors().dark,
             shape = CircleShape
         ).size(size)
-            .clip(CircleShape).clickable {
-                onPressed?.invoke()
-            },
+            .clip(CircleShape) then (
+                if (onPressed != null) {
+                    Modifier.clickable { onPressed.invoke() }
+                } else {
+                    Modifier
+                }
+                ),
         model = Res.getUri(imageUrl),
         contentDescription = "any",
     )
