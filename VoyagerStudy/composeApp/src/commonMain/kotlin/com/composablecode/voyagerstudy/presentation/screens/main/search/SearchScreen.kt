@@ -46,8 +46,7 @@ fun SearchScreen(mainViewModel: MainViewModel = koinViewModel()) {
                 content = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-
-                        ) {
+                    ) {
                         Avatar(
                             imageUrl = "drawable/images/avatar-1.png",
                             onPressed = {
@@ -62,9 +61,7 @@ fun SearchScreen(mainViewModel: MainViewModel = koinViewModel()) {
                             ),
                             onValueChange = {}
                         )
-
                     }
-
                 },
                 trailing = {
                     ButtonIcon(
