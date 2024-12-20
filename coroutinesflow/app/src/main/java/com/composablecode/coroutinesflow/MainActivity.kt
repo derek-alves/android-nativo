@@ -11,6 +11,7 @@ import com.composablecode.coroutinesflow.sections.compose_coroutines.BirdsScreen
 import com.composablecode.coroutinesflow.ui.theme.CoroutinesflowTheme
 import com.composablecode.coroutinesflow.sections.compose_coroutines.CounterScreen
 import com.composablecode.coroutinesflow.sections.compose_coroutines.ProfileScreen
+import com.composablecode.coroutinesflow.sections.coroutine_cancelation.trap3.FileManager
 import com.composablecode.coroutinesflow.sections.coroutines_context.queryDatabase
 import com.composablecode.coroutinesflow.sections.coroutines_context.withContextDemo
 import kotlinx.coroutines.CoroutineScope
@@ -50,7 +51,14 @@ class MainActivity : ComponentActivity() {
             println("Time taken: $timeMillis")
         }
 
-
+        val fileManager = FileManager(applicationContext)
+        lifecycleScope.launch {
+            val job = launch {
+                fileManager.writeRecordsToFile()
+            }
+            delay(3000L)
+            job.cancel()
+        }
 
         setContent {
             CoroutinesflowTheme {
