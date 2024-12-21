@@ -26,6 +26,7 @@ fun App() {
     }
 
     AppTheme(designSystemManager) {
+        val test: Greeting = Greeting()
 
         ResponsiveLayout(
             breakpoints = listOf(
