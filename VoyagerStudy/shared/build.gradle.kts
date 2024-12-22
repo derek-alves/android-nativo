@@ -43,6 +43,10 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             api(libs.kotlinx.serialization.json)
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.coil.compose)
+            implementation(libs.koin.core)
+            api(libs.koin.annotations)
         }
     }
 }
