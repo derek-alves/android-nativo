@@ -78,6 +78,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
 
             api(libs.koin.annotations)
+            implementation(libs.coil.compose)
             implementation(libs.koin.core)
             implementation(libs.koin.compose.viewmodel)
         }
