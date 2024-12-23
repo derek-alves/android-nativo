@@ -33,11 +33,11 @@ import com.composablecode.voyagerstudy.designSystem.components.ButtonIcon
 import com.composablecode.voyagerstudy.designSystem.customColors
 import com.composablecode.voyagerstudy.designSystem.spacings
 import com.composablecode.voyagerstudy.presentation.components.DrawerMobile
-import com.composablecode.voyagerstudy.presentation.screens.main.MainViewModel
 import com.composablecode.voyagerstudy.presentation.screens.main.tab.HomeTab
 import com.composablecode.voyagerstudy.presentation.screens.main.tab.MailTab
 import com.composablecode.voyagerstudy.presentation.screens.main.tab.NotificationTab
 import com.composablecode.voyagerstudy.presentation.screens.main.tab.SearchTab
+import com.composablecode.voyagerstudy.presentation.viewModel.MainViewModel
 import com.composablecode.voyagerstudy.utils.DrawerShape
 import kotlinx.coroutines.launch
 

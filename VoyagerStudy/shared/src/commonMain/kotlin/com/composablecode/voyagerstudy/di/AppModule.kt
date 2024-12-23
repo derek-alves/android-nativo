@@ -1,9 +1,9 @@
 package com.composablecode.voyagerstudy.di
 
-import com.composablecode.voyagerstudy.presentation.screens.main.MainViewModel
+import com.composablecode.voyagerstudy.presentation.viewModel.MainViewModel
 import org.koin.dsl.module
 
-val viewModelModule = module {
+val appModule = module {
     single {
         MainViewModel()
     }

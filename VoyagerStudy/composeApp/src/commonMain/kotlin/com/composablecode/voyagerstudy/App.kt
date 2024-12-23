@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.dp
 import com.composablecode.voyagerstudy.data.jsonString
 import com.composablecode.voyagerstudy.designSystem.AppTheme
 import com.composablecode.voyagerstudy.designSystem.DesignSystemManager
-import com.composablecode.voyagerstudy.di.viewModelModule
+import com.composablecode.voyagerstudy.di.appModule
 import com.composablecode.voyagerstudy.presentation.screens.main.MainScreen
 import com.composablecode.voyagerstudy.responsive.Breakpoint
 import com.composablecode.voyagerstudy.responsive.MaxWidthBox
@@ -26,8 +26,6 @@ fun App() {
     }
 
     AppTheme(designSystemManager) {
-        val test: Greeting = Greeting()
-
         ResponsiveLayout(
             breakpoints = listOf(
                 Breakpoint(start = 0.0, end = 450.0, type = BreakPointPlatform.MOBILE),
@@ -38,14 +36,13 @@ fun App() {
             MaxWidthBox(maxWidth = 900.dp, alignment = Alignment.Center) {
                 KoinApplication(application = {
                     modules(
-                        viewModelModule
+                        appModule
                     )
                 }) {
                     MainScreen()
                 }
 
             }
-
         }
     }
 }
