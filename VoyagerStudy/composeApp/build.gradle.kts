@@ -66,7 +66,7 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodel)
+
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(projects.shared)
             implementation(libs.voyager.koin)
@@ -75,6 +75,10 @@ kotlin {
             implementation(libs.voyager.transitions)
             implementation(libs.voyager.tabNavigator)
             implementation(libs.voyager.bottomSheetNavigator)
+            implementation(libs.androidx.lifecycle.viewmodel)
+
+            api(libs.koin.annotations)
+            implementation(libs.koin.core)
             implementation(libs.koin.compose.viewmodel)
         }
 

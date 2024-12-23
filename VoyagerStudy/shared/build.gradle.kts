@@ -46,6 +46,8 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.coil.compose)
             implementation(libs.koin.core)
+
+            implementation(libs.koin.compose.viewmodel)
             api(libs.koin.annotations)
         }
     }

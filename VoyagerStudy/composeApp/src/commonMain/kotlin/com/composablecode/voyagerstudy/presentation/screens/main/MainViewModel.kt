@@ -1,4 +1,4 @@
-package com.composablecode.voyagerstudy.presentation.viewModel
+package com.composablecode.voyagerstudy.presentation.screens.main
 
 import androidx.compose.material.DrawerValue
 import androidx.lifecycle.ViewModel
@@ -20,5 +20,4 @@ class MainViewModel : ViewModel() {
     fun setDrawerState(drawerValue: DrawerValue) {
         _drawerState.value = drawerValue
     }
-
 }

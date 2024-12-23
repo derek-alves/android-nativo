@@ -15,7 +15,6 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.composablecode.voyagerstudy.presentation.components.DrawerItem
@@ -24,14 +23,13 @@ import com.composablecode.voyagerstudy.presentation.screens.main.tab.HomeTab
 import com.composablecode.voyagerstudy.presentation.screens.main.tab.MailTab
 import com.composablecode.voyagerstudy.presentation.screens.main.tab.NotificationTab
 import com.composablecode.voyagerstudy.presentation.screens.main.tab.SearchTab
-import com.composablecode.voyagerstudy.presentation.viewModel.MainViewModel
 import com.composablecode.voyagerstudy.responsive.AdaptiveScreen
 import com.composablecode.voyagerstudy.responsive.mediaQueryProvider
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun MainScreen(modifier: Modifier = Modifier, mainViewModel: MainViewModel = koinViewModel()) {
+fun MainScreen(mainViewModel: MainViewModel = koinViewModel()) {
     AdaptiveScreen(
         state = mainViewModel,
         onMobile = { it -> OnMobile(it) },
@@ -75,8 +73,6 @@ fun onTablet() {
                     })
 
             })
-
-
     }
 }
 
