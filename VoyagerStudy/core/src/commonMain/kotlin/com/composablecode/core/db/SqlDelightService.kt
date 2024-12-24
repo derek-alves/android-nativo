@@ -2,7 +2,7 @@ package com.composablecode.core.db
 
 import app.cash.sqldelight.db.SqlDriver
 
-class SqlDelight : DBService<SqlDriver> {
+class SqlDelightService : DBService<SqlDriver> {
     override fun createDriver(
         jdbcUrl: String,
         driverClassName: String,
