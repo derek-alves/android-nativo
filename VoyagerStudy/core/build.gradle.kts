@@ -12,7 +12,7 @@ kotlin {
             }
         }
     }
-
+    jvm()
     listOf(
         iosX64(),
         iosArm64(),
@@ -27,6 +27,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.sqldelight.coroutines.extensions)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

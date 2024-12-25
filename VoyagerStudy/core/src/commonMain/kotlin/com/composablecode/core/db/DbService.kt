@@ -6,12 +6,12 @@ interface DBService<T> {
         driverClassName: String,
         username: String,
         password: String,
-        maxPoolSize: Int = 5,
-        minIdle: Int = 2,
-        idleTimeout: Long = 10000,
-        connectionTimeout: Long = 30000,
-        maxLifetime: Long = 1800000
+        maxPoolSize: Int,
+        minIdle: Int,
+        idleTimeout: Long,
+        connectionTimeout: Long,
+        maxLifetime: Long
     ): T
 
-    fun closeDriver()
+    
 }

@@ -15,10 +15,12 @@ application {
 }
 
 dependencies {
+    implementation(projects.core)
     implementation(projects.shared)
     implementation(libs.logback)
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.netty)
+    implementation(project(":core"))
     testImplementation(libs.kotlin.test.junit)
     implementation(libs.koin.core)
     implementation(libs.koin.ktor)
