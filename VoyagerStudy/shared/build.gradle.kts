@@ -35,7 +35,6 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.ui)
             implementation(compose.foundation)
-            implementation(compose.runtime)
             implementation(libs.kotlinx.serialization)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.androidx.viewmodel.compose)

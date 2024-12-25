@@ -23,6 +23,7 @@ import com.composablecode.voyagerstudy.presentation.screens.main.tab.HomeTab
 import com.composablecode.voyagerstudy.presentation.screens.main.tab.MailTab
 import com.composablecode.voyagerstudy.presentation.screens.main.tab.NotificationTab
 import com.composablecode.voyagerstudy.presentation.screens.main.tab.SearchTab
+import com.composablecode.voyagerstudy.presentation.viewModel.MainViewModel
 import com.composablecode.voyagerstudy.responsive.AdaptiveScreen
 import com.composablecode.voyagerstudy.responsive.mediaQueryProvider
 import kotlinx.coroutines.launch
@@ -42,6 +43,8 @@ fun MainScreen(mainViewModel: MainViewModel = koinViewModel()) {
 fun onTablet() {
     val mediaQuery = mediaQueryProvider.current
     val scope = rememberCoroutineScope()
+
+
     val drawerState = remember { DrawerState(DrawerValue.Closed) }
     TabNavigator(HomeTab) {
         Scaffold(

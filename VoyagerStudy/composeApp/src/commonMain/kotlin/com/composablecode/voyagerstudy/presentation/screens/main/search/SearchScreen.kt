@@ -25,7 +25,7 @@ import com.composablecode.voyagerstudy.designSystem.spacings
 import com.composablecode.voyagerstudy.domain.entity.Trend
 import com.composablecode.voyagerstudy.presentation.components.AppBar
 import com.composablecode.voyagerstudy.presentation.components.TrendItem
-import com.composablecode.voyagerstudy.presentation.screens.main.MainViewModel
+import com.composablecode.voyagerstudy.presentation.viewModel.MainViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

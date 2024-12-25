@@ -16,7 +16,7 @@ import com.composablecode.voyagerstudy.domain.entity.Tweet
 import com.composablecode.voyagerstudy.presentation.components.AppBar
 import com.composablecode.voyagerstudy.presentation.components.Header
 import com.composablecode.voyagerstudy.presentation.components.TweetCard
-import com.composablecode.voyagerstudy.presentation.screens.main.MainViewModel
+import com.composablecode.voyagerstudy.presentation.viewModel.MainViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

@@ -8,16 +8,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.DrawerState
 import androidx.compose.material.DrawerValue
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.rememberDrawerState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -33,37 +32,42 @@ import com.composablecode.voyagerstudy.designSystem.components.ButtonIcon
 import com.composablecode.voyagerstudy.designSystem.customColors
 import com.composablecode.voyagerstudy.designSystem.spacings
 import com.composablecode.voyagerstudy.presentation.components.DrawerMobile
-import com.composablecode.voyagerstudy.presentation.screens.main.MainViewModel
 import com.composablecode.voyagerstudy.presentation.screens.main.tab.HomeTab
 import com.composablecode.voyagerstudy.presentation.screens.main.tab.MailTab
 import com.composablecode.voyagerstudy.presentation.screens.main.tab.NotificationTab
 import com.composablecode.voyagerstudy.presentation.screens.main.tab.SearchTab
+import com.composablecode.voyagerstudy.presentation.viewModel.DrawerState
+import com.composablecode.voyagerstudy.presentation.viewModel.MainViewModel
 import com.composablecode.voyagerstudy.utils.DrawerShape
+import com.composablecode.voyagerstudy.utils.toDrawerValue
 import kotlinx.coroutines.launch
 
 @Composable
 fun OnMobile(mainViewModel: MainViewModel) {
     val scope = rememberCoroutineScope()
-    val drawerState = remember { DrawerState(DrawerValue.Closed) }
-    val scaffoldState = rememberScaffoldState(drawerState = drawerState)
     val drawerStateValue by mainViewModel.drawerState.collectAsState()
+    val drawerValue = drawerStateValue.toDrawerValue()
+
+    val drawerState = rememberDrawerState(initialValue = drawerValue)
 
     LaunchedEffect(drawerState.currentValue) {
-        val currentDrawerState = when (drawerState.currentValue) {
-            DrawerValue.Open -> DrawerValue.Open
-            DrawerValue.Closed -> DrawerValue.Closed
+        val newViewModelState = when (drawerState.currentValue) {
+            DrawerValue.Open -> DrawerState.OPEN
+            DrawerValue.Closed -> DrawerState.CLOSED
         }
-        if (currentDrawerState != drawerStateValue) {
-            mainViewModel.setDrawerState(currentDrawerState)
+        if (drawerStateValue != newViewModelState) {
+            mainViewModel.setDrawerState(newViewModelState)
         }
     }
 
     LaunchedEffect(drawerStateValue) {
-        when (drawerStateValue) {
+        when (drawerValue) {
             DrawerValue.Open -> drawerState.open()
             DrawerValue.Closed -> drawerState.close()
         }
     }
+
+    val scaffoldState = rememberScaffoldState(drawerState = drawerState)
 
 
     TabNavigator(HomeTab) {
