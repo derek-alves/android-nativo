@@ -1,4 +1,4 @@
-package com.composablecode.voyagerstudy.infra.database
+package com.composablecode.voyagerstudy.application.infra.database
 
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.jdbc.asJdbcDriver
@@ -35,5 +35,5 @@ class SqlDelightService : DBService<SqlDriver> {
         return dataSource.asJdbcDriver()
     }
 
-    
+
 }

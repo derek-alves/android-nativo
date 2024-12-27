@@ -29,8 +29,8 @@ CREATE TABLE Tweet (
     userName TEXT NOT NULL,
     text TEXT NOT NULL,
     likeQty INTEGER NOT NULL DEFAULT 0,
-    image TEXT,
-    identifier TEXT,
+    image TEXT NOT NULL,
+    identifier TEXT NOT NULL,
     createdAt TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY (userID) REFERENCES User(id) ON DELETE CASCADE
 );
