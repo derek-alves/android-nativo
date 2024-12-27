@@ -1,0 +1,106 @@
+CREATE TABLE User (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    userName TEXT NOT NULL UNIQUE,
+    description TEXT,
+    city TEXT,
+    createdAt TIMESTAMP DEFAULT NOW(),
+    followingQty INTEGER NOT NULL DEFAULT 0,
+    followersQty INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE INDEX User_userName ON User(userName);
+
+INSERT INTO User (name, userName, description, city, createdAt, followingQty, followersQty)
+VALUES
+  ('Alice Smith', 'alice123', 'Loves coding and coffee.', 'New York', '2024-01-01 10:00:00', 120, 500),
+  ('Bob Johnson', 'bob456', 'Tech enthusiast and blogger.', 'San Francisco', '2024-01-02 11:00:00', 150, 800);
+
+insertUser:
+INSERT INTO User (name, userName, description, city, createdAt, followingQty, followersQty)
+VALUES (?, ?, ?, ?, ?, ?, ?);
+
+selectAllUsers:
+SELECT * FROM User;
+
+CREATE TABLE Tweet (
+    id SERIAL PRIMARY KEY,
+    userID INTEGER NOT NULL,
+    userName TEXT NOT NULL,
+    text TEXT NOT NULL,
+    likeQty INTEGER NOT NULL DEFAULT 0,
+    image TEXT,
+    identifier TEXT,
+    createdAt TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (userID) REFERENCES User(id) ON DELETE CASCADE
+);
+
+CREATE INDEX Tweet_userID ON Tweet(userID);
+CREATE INDEX Tweet_userName ON Tweet(userName);
+
+INSERT INTO Tweet (userID, userName, text, likeQty, image, identifier, createdAt)
+VALUES
+  (1, 'alice123', 'Hello, world!', 10, NULL, 'identifier1', '2024-01-03 12:00:00'),
+  (2, 'bob456', 'First tweet!', 25, NULL, 'identifier2', '2024-01-03 13:00:00');
+
+insertTweet:
+INSERT INTO Tweet (userID, userName, text, likeQty, image, identifier, createdAt)
+VALUES (?, ?, ?, ?, ?, ?, ?);
+
+selectAllTweets:
+SELECT * FROM Tweet;
+
+selectTweetsByUserID:
+SELECT * FROM Tweet WHERE userID = ?;
+
+CREATE TABLE Like (
+    id SERIAL PRIMARY KEY,
+    userID INTEGER NOT NULL,
+    tweetID INTEGER NOT NULL,
+    createdAt TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (userID) REFERENCES User(id) ON DELETE CASCADE,
+    FOREIGN KEY (tweetID) REFERENCES Tweet(id) ON DELETE CASCADE
+);
+
+CREATE INDEX Like_userID ON Like(userID);
+CREATE INDEX Like_tweetID ON Like(tweetID);
+
+INSERT INTO Like (userID, tweetID)
+VALUES
+  (1, 1),
+  (2, 2);
+
+insertLike:
+INSERT INTO Like (userID, tweetID)
+VALUES (?, ?);
+
+selectLikesByTweetID:
+SELECT * FROM Like WHERE tweetID = ?;
+
+CREATE TABLE Comment (
+    id SERIAL PRIMARY KEY,
+    tweetID INTEGER NOT NULL,
+    userID INTEGER NOT NULL,
+    content TEXT NOT NULL,
+    createdAt TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (tweetID) REFERENCES Tweet(id) ON DELETE CASCADE,
+    FOREIGN KEY (userID) REFERENCES User(id) ON DELETE CASCADE
+);
+
+CREATE INDEX Comment_tweetID ON Comment(tweetID);
+CREATE INDEX Comment_userID ON Comment(userID);
+
+INSERT INTO Comment (tweetID, userID, content)
+VALUES
+  (1, 1, 'Great tweet!'),
+  (2, 2, 'Thanks for sharing!');
+
+insertComment:
+INSERT INTO Comment (tweetID, userID, content)
+VALUES (?, ?, ?);
+
+selectCommentsByTweetID:
+SELECT * FROM Comment WHERE tweetID = ?;
+
+selectAllComments:
+SELECT * FROM Comment;
