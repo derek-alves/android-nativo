@@ -1,4 +1,4 @@
-CREATE TABLE User (
+CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     userName TEXT NOT NULL UNIQUE,
@@ -9,19 +9,19 @@ CREATE TABLE User (
     followersQty INTEGER NOT NULL DEFAULT 0
 );
 
-CREATE INDEX User_userName ON User(userName);
+CREATE INDEX User_userName ON users(userName);
 
-INSERT INTO User (name, userName, description, city, createdAt, followingQty, followersQty)
+INSERT INTO users (name, userName, description, city, createdAt, followingQty, followersQty)
 VALUES
   ('Alice Smith', 'alice123', 'Loves coding and coffee.', 'New York', '2024-01-01 10:00:00', 120, 500),
   ('Bob Johnson', 'bob456', 'Tech enthusiast and blogger.', 'San Francisco', '2024-01-02 11:00:00', 150, 800);
 
 insertUser:
-INSERT INTO User (name, userName, description, city, createdAt, followingQty, followersQty)
+INSERT INTO users (name, userName, description, city, createdAt, followingQty, followersQty)
 VALUES (?, ?, ?, ?, ?, ?, ?);
 
 selectAllUsers:
-SELECT * FROM User;
+SELECT * FROM users;
 
 CREATE TABLE Tweet (
     id SERIAL PRIMARY KEY,
@@ -32,7 +32,7 @@ CREATE TABLE Tweet (
     image TEXT NOT NULL,
     identifier TEXT NOT NULL,
     createdAt TIMESTAMP DEFAULT NOW(),
-    FOREIGN KEY (userID) REFERENCES User(id) ON DELETE CASCADE
+    FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE INDEX Tweet_userID ON Tweet(userID);
@@ -58,7 +58,7 @@ CREATE TABLE Like (
     userID INTEGER NOT NULL,
     tweetID INTEGER NOT NULL,
     createdAt TIMESTAMP DEFAULT NOW(),
-    FOREIGN KEY (userID) REFERENCES User(id) ON DELETE CASCADE,
+    FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (tweetID) REFERENCES Tweet(id) ON DELETE CASCADE
 );
 
@@ -84,7 +84,7 @@ CREATE TABLE Comment (
     content TEXT NOT NULL,
     createdAt TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY (tweetID) REFERENCES Tweet(id) ON DELETE CASCADE,
-    FOREIGN KEY (userID) REFERENCES User(id) ON DELETE CASCADE
+    FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE INDEX Comment_tweetID ON Comment(tweetID);
