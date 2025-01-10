@@ -10,6 +10,6 @@ data class Tweet(
     val text: String,
     val likeQty: Int,
     val image: String?,
-    val identifier: String?,
+    val identifier: String,
     val createdAt: Long?
 )

@@ -21,23 +21,33 @@ fun main() {
         Netty,
         port = HTTP_PORT,
         host = HTTP_HOST,
-        module = Application::module
-    )
+        module = Application::module,
+
+        )
         .start(wait = true)
 }
 
 fun Application.module() {
+
     install(Koin) {
         modules(serverModule)
     }
+
+    // Retrieve the Json instance after Koin is initialized
+    val json = get<Json>()
+
+    // Install Content Negotiation
     install(ContentNegotiation) {
-        json(get<Json>())
+        json(json)
     }
+
+    // Install CORS
     install(CORS) {
         anyHost()
         allowHeader(HttpHeaders.ContentType)
         allowHeader(HttpHeaders.AccessControlAllowOrigin)
         allowMethod(HttpMethod.Delete)
     }
+
     serverRouter()
 }

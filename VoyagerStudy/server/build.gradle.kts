@@ -9,9 +9,10 @@ plugins {
 group = "com.composablecode.voyagerstudy"
 version = "1.0.0"
 application {
+    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=true")
+
     mainClass.set("com.composablecode.voyagerstudy.ApplicationKt")
-    applicationDefaultJvmArgs =
-        listOf("-Dio.ktor.development=${extra["io.ktor.development"] ?: "false"}")
+//        listOf("-Dio.ktor.development=${extra["io.ktor.development"] ?: "true"}")
 }
 
 dependencies {
