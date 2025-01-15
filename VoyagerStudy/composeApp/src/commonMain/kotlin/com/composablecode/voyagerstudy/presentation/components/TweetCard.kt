@@ -35,8 +35,11 @@ fun TweetCard(modifier: Modifier = Modifier, tweet: Tweet) {
                 ),
             verticalAlignment = Alignment.Top
         ) {
-            Avatar(imageUrl = tweet.image)
-            Spacer(modifier = Modifier.width(spacing.md))
+            if (tweet.image != null) {
+                Avatar(imageUrl = tweet.image!!)
+                Spacer(modifier = Modifier.width(spacing.md))
+            }
+
             Column(
                 verticalArrangement = Arrangement.Top
             ) {

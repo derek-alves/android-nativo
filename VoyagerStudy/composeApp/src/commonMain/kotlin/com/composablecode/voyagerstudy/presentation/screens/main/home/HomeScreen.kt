@@ -57,11 +57,11 @@ fun HomeScreen(mainViewModel: MainViewModel = koinViewModel()) {
                     TweetCard(
                         tweet = Tweet(
                             text = "Amet habitant mollis adipiscing pretium scelerisque urna euismod nec nullam.",
-                            id = "any-id",
+                            id = 0,
                             image = "drawable/images/avatar-5.png",
                             likeQty = 3,
                             userName = "Tommy Blue",
-                            identifier = "@tommy_blue"
+                            identifier = "@tommy_blue", userId = 0, createdAt = 0
                         )
                     )
                 }

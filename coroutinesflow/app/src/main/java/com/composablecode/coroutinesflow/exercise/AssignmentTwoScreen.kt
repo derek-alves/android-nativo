@@ -40,60 +40,60 @@ import kotlinx.coroutines.withContext
 
 @Composable
 fun AssignmentTwoScreen() {
-    var photoUri by remember { mutableStateOf<Uri?>(null) }
-    val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-    val isLoading by remember { mutableStateOf(false) }
-    var backgroundColor by remember { mutableStateOf(Color.White) }
-
-    val imagePicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.PickVisualMedia()
-    ) {
-        photoUri = it
-        if (it != null) {
-            // Start processing the image in a coroutine
-            scope.launch {
-                processImage(context, it) { color ->
-                    backgroundColor = color
-                }
-            }
-        }
-    }
-
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(backgroundColor),
-    ) {
-        RotatingBoxScreen()
-        Spacer(modifier = Modifier.height(64.dp))
-        Button(onClick = {
-            imagePicker.launch(
-                input = PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly),
-            )
-        }) {
-            Text(text = "Pick Image")
-        }
-        if (isLoading) {
-            Text(text = "Finding dominant color...")
-        }
-
-        if (photoUri != null) {
-            val painter = rememberAsyncImagePainter(
-                ImageRequest
-                    .Builder(context)
-                    .data(data = photoUri)
-                    .build()
-            )
-
-            Image(
-                painter = painter,
-                contentDescription = null
-            )
-        }
-    }
+//    var photoUri by remember { mutableStateOf<Uri?>(null) }
+//    val context = LocalContext.current
+//    val scope = rememberCoroutineScope()
+//    val isLoading by remember { mutableStateOf(false) }
+//    var backgroundColor by remember { mutableStateOf(Color.White) }
+//
+//    val imagePicker = rememberLauncherForActivityResult(
+//        contract = ActivityResultContracts.PickVisualMedia()
+//    ) {
+//        photoUri = it
+//        if (it != null) {
+//            // Start processing the image in a coroutine
+//            scope.launch {
+//                processImage(context, it) { color ->
+//                    backgroundColor = color
+//                }
+//            }
+//        }
+//    }
+//
+//    Column(
+//        verticalArrangement = Arrangement.Center,
+//        horizontalAlignment = Alignment.CenterHorizontally,
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .background(backgroundColor),
+//    ) {
+//        RotatingBoxScreen()
+//        Spacer(modifier = Modifier.height(64.dp))
+//        Button(onClick = {
+//            imagePicker.launch(
+//                input = PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly),
+//            )
+//        }) {
+//            Text(text = "Pick Image")
+//        }
+//        if (isLoading) {
+//            Text(text = "Finding dominant color...")
+//        }
+//
+//        if (photoUri != null) {
+//            val painter = rememberAsyncImagePainter(
+//                ImageRequest
+//                    .Builder(context)
+//                    .data(data = photoUri)
+//                    .build()
+//            )
+//
+//            Image(
+//                painter = painter,
+//                contentDescription = null
+//            )
+//        }
+   // }
 }
 
 suspend fun processImage(context: Context, uri: Uri, onResult: (Color) -> Unit) {

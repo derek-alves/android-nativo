@@ -33,8 +33,8 @@ fun Application.module() {
         modules(serverModule)
     }
 
-    // Retrieve the Json instance after Koin is initialized
     val json = get<Json>()
+    
 
     // Install Content Negotiation
     install(ContentNegotiation) {

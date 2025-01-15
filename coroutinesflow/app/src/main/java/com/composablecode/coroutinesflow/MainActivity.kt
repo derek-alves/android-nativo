@@ -1,16 +1,16 @@
 package com.composablecode.coroutinesflow
 
+import android.content.Context
+import android.location.LocationManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.core.app.ActivityCompat
+import androidx.core.content.getSystemService
 import androidx.lifecycle.lifecycleScope
 import com.composablecode.coroutinesflow.exercise.AssignmentTwoScreen
-import com.composablecode.coroutinesflow.sections.compose_coroutines.BirdSoundsApp
-import com.composablecode.coroutinesflow.sections.compose_coroutines.BirdsScreen
 import com.composablecode.coroutinesflow.ui.theme.CoroutinesflowTheme
-import com.composablecode.coroutinesflow.sections.compose_coroutines.CounterScreen
-import com.composablecode.coroutinesflow.sections.compose_coroutines.ProfileScreen
 import com.composablecode.coroutinesflow.sections.coroutine_cancelation.trap3.FileManager
 import com.composablecode.coroutinesflow.sections.coroutines_context.queryDatabase
 import com.composablecode.coroutinesflow.sections.coroutines_context.withContextDemo
@@ -21,44 +21,43 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.system.measureTimeMillis
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import android.location.Location
+import android.os.CancellationSignal
+import kotlinx.coroutines.suspendCancellableCoroutine
+import java.util.concurrent.Executors
+import java.util.function.Consumer
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
+
 
 class MainActivity : ComponentActivity() {
     private val customLifecycleObserver = CoroutineScope(Dispatchers.Main)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        val job = lifecycleScope.launch {
-                queryDatabase()
-            withContextDemo()
-            val profileDeferred = async{
-                println("Fetching profile")
-                delay(2000L)
-                "Profile"
-            }
+        ActivityCompat.requestPermissions(this, arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ),0)
 
-            val postsDeferred = async {
-                println("Fetching posts")
-                delay(3000L)
-                "Posts"
-            }
-
-            val timeMillis = measureTimeMillis {
-                val post = postsDeferred.await()
-                val profile = profileDeferred.await()
-                println("Post: $post")
-                println("Profile: $profile")
-            }
-            println("Time taken: $timeMillis")
-        }
-
-        val fileManager = FileManager(applicationContext)
         lifecycleScope.launch {
-            val job = launch {
-                fileManager.writeRecordsToFile()
-            }
-            delay(3000L)
-            job.cancel()
+//            val location = getLocation()
+//            println("Location: $location")
         }
+
+
+       // val fileManager = FileManager(applicationContext)
+//        lifecycleScope.launch {
+//            val job = launch {
+//                fileManager.writeRecordsToFile()
+//            }
+//            delay(3000L)
+//            job.cancel()
+//        }
 
         setContent {
             CoroutinesflowTheme {
@@ -70,5 +69,40 @@ class MainActivity : ComponentActivity() {
         super.onDestroy()
         customLifecycleObserver.cancel()
     }
+}
+
+@SuppressLint("NewApi")
+suspend fun Context.getLocation():Location{
+    return suspendCancellableCoroutine { continuation ->
+        val locationManager = getSystemService<LocationManager>()!!
+
+        val hasFineLocationPermission = ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) ==   PackageManager.PERMISSION_GRANTED
+
+        val hasCoarseLocationPermission = ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ) ==   PackageManager.PERMISSION_GRANTED
+        val signal = CancellationSignal()
+        if(hasFineLocationPermission || hasCoarseLocationPermission){
+            val location = locationManager.getCurrentLocation(
+                LocationManager.NETWORK_PROVIDER,
+                signal,
+                mainExecutor,
+            ) { location ->
+                continuation.resume(location)
+            }
+        }else{
+            continuation.resumeWithException(
+                RuntimeException("Missing permission")
+            )
+        }
+        continuation.invokeOnCancellation {
+            signal.cancel()
+        }
+    }
+
 }
 
