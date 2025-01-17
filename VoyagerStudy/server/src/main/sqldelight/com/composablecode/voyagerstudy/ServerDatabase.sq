@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     userName TEXT NOT NULL UNIQUE,
@@ -9,7 +9,7 @@ CREATE TABLE users (
     followersQty INTEGER NOT NULL DEFAULT 0
 );
 
-CREATE INDEX User_userName ON users(userName);
+CREATE INDEX IF NOT EXISTS User_userName ON users(userName);
 
 insertUser:
 INSERT INTO users (name, userName, description, city,  followingQty, followersQty)
@@ -18,7 +18,7 @@ VALUES (?, ?, ?, ?, ?, ?);
 selectAllUsers:
 SELECT * FROM users;
 
-CREATE TABLE tweet (
+CREATE TABLE IF NOT EXISTS tweet (
     id SERIAL PRIMARY KEY,
     userID INTEGER NOT NULL,
     userName TEXT NOT NULL,
@@ -30,8 +30,8 @@ CREATE TABLE tweet (
     FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE INDEX Tweet_userID ON tweet(userID);
-CREATE INDEX Tweet_userName ON tweet(userName);
+CREATE INDEX IF NOT EXISTS Tweet_userID ON tweet(userID);
+CREATE INDEX IF NOT EXISTS Tweet_userName ON tweet(userName);
 
 insertTweet:
 INSERT INTO tweet (userID, userName, text, likeQty, image, identifier )
@@ -43,7 +43,7 @@ SELECT * FROM tweet;
 selectTweetsByUserID:
 SELECT * FROM tweet WHERE userID = ?;
 
-CREATE TABLE likes (
+CREATE TABLE IF NOT EXISTS likes (
     id SERIAL PRIMARY KEY,
     userID INTEGER NOT NULL,
     tweetID INTEGER NOT NULL,
@@ -52,8 +52,8 @@ CREATE TABLE likes (
     FOREIGN KEY (tweetID) REFERENCES tweet(id) ON DELETE CASCADE
 );
 
-CREATE INDEX Like_userID ON likes(userID);
-CREATE INDEX Like_tweetID ON likes(tweetID);
+CREATE INDEX IF NOT EXISTS Like_userID ON likes(userID);
+CREATE INDEX IF NOT EXISTS Like_tweetID ON likes(tweetID);
 
 insertLike:
 INSERT INTO likes (userID, tweetID)
@@ -62,7 +62,7 @@ VALUES (?, ?);
 selectLikesByTweetID:
 SELECT * FROM likes WHERE tweetID = ?;
 
-CREATE TABLE Comment (
+CREATE TABLE IF NOT EXISTS Comment (
     id SERIAL PRIMARY KEY,
     tweetID INTEGER NOT NULL,
     userID INTEGER NOT NULL,
@@ -72,9 +72,8 @@ CREATE TABLE Comment (
     FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE INDEX Comment_tweetID ON Comment(tweetID);
-CREATE INDEX Comment_userID ON Comment(userID);
-
+CREATE INDEX IF NOT EXISTS Comment_tweetID ON Comment(tweetID);
+CREATE INDEX IF NOT EXISTS Comment_userID ON Comment(userID);
 
 
 insertComment:
