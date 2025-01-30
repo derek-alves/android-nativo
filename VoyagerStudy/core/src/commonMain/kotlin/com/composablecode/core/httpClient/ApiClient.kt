@@ -1,27 +1,29 @@
 package com.composablecode.core.httpClient
 
+import com.composablecode.core.httpClient.utils.MapType
+
 interface ApiClient {
     suspend fun get(
         url: String,
-        headers: Map<String, String> = emptyMap()
-    ): Result<Map<String, String>>
+        headers: MapType = emptyMap()
+    ): Result<String>
 
     suspend fun post(
         url: String,
         body: Any? = null,
-        headers: Map<String, String> = emptyMap()
-    ): Result<Map<String, String>?>
+        headers: MapType = emptyMap()
+    ): Result<String>
 
     suspend fun put(
         url: String,
         body: Any? = null,
-        headers: Map<String, String> = emptyMap()
-    ): Result<Map<String, String>?>
+        headers: MapType = emptyMap()
+    ): Result<String>
 
     suspend fun delete(
         url: String,
-        headers: Map<String, String> = emptyMap()
-    ): Result<Map<String, String>?>
+        headers: MapType = emptyMap()
+    ): Result<String>
 }
 
 
@@ -31,13 +33,14 @@ sealed class Result<out T> {
 }
 
 sealed class ApiError {
-    data object BadRequest : ApiError() // 400
-    data object Unauthorized : ApiError() // 401
-    data object Forbidden : ApiError() // 403
-    data object NotFound : ApiError() // 404
-    data object InternalServerError : ApiError() // 500
-    data object ServiceUnavailable : ApiError() // 503
-    data object Timeout : ApiError() // Timeout
-    data object Unknown : ApiError() // Qualquer outro erro
+    data object BadRequest : ApiError()
+    data object Unauthorized : ApiError()
+    data object Forbidden : ApiError()
+    data object NotFound : ApiError()
+    data object InternalServerError : ApiError()
+    data object ServiceUnavailable : ApiError()
+    data object Timeout : ApiError()
+    data object Unknown : ApiError()
+    data object NetWorkError : ApiError()
     data class CustomError(val statusCode: Int, val message: String) : ApiError()
 }

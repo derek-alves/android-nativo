@@ -1,79 +1,46 @@
 package com.composablecode.core.httpClient
 
+import com.composablecode.core.httpClient.utils.MapType
 import io.ktor.client.HttpClient
-import io.ktor.client.request.delete
-import io.ktor.client.request.get
+import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.request.header
-import io.ktor.client.request.post
-import io.ktor.client.request.put
+import io.ktor.client.request.request
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
+import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
-import kotlinx.serialization.json.Json
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.io.IOException
 
 class ApiClientImpl(private val client: HttpClient) : ApiClient {
-
-    override suspend fun get(
-        url: String,
-        headers: Map<String, String>
-    ): Result<Map<String, String>> {
-        return executeRequest {
-            client.get(url) {
-                headers.forEach { (key, value) -> header(key, value) }
-            }
-        }
+    override suspend fun get(url: String, headers: MapType): Result<String> {
+        return makeRequest(HttpMethod.Get, url, headers)
     }
 
-    override suspend fun post(
-        url: String,
-        body: Any?,
-        headers: Map<String, String>
-    ): Result<Map<String, String>?> {
-        return executeRequest {
-            client.post(url) {
-                headers.forEach { (key, value) -> header(key, value) }
-                setBody(body ?: "")
-            }
-        }
+    override suspend fun post(url: String, body: Any?, headers: MapType): Result<String> {
+        return makeRequest(HttpMethod.Post, url, headers, body ?: "{}")
     }
 
-    override suspend fun put(
-        url: String,
-        body: Any?,
-        headers: Map<String, String>
-    ): Result<Map<String, String>?> {
-        return executeRequest {
-            client.put(url) {
-                headers.forEach { (key, value) -> header(key, value) }
-                setBody(body ?: "")
-            }
-        }
+    override suspend fun put(url: String, body: Any?, headers: MapType): Result<String> {
+        return makeRequest(HttpMethod.Put, url, headers, body ?: "{}")
     }
 
-    override suspend fun delete(
-        url: String,
-        headers: Map<String, String>
-    ): Result<Map<String, String>?> {
-        return executeRequest {
-            client.delete(url) {
-                headers.forEach { (key, value) -> header(key, value) }
-            }
-        }
+    override suspend fun delete(url: String, headers: MapType): Result<String> {
+        return makeRequest(HttpMethod.Delete, url, headers)
     }
 
     private suspend inline fun executeRequest(
         request: () -> HttpResponse
-    ): Result<Map<String, String>> {
+    ): Result<String> {
         return try {
             val response = request()
 
-            val bodyAsJson = Json.parseToJsonElement(response.bodyAsText())
 
-
-            // Verificar o status da resposta
             when (response.status) {
-                HttpStatusCode.OK -> Result.Success(bodyAsJson)
+                HttpStatusCode.OK -> Result.Success(response.bodyAsText())
                 HttpStatusCode.BadRequest -> Result.Failure(ApiError.BadRequest)
                 HttpStatusCode.Unauthorized -> Result.Failure(ApiError.Unauthorized)
                 HttpStatusCode.Forbidden -> Result.Failure(ApiError.Forbidden)
@@ -85,11 +52,32 @@ class ApiClientImpl(private val client: HttpClient) : ApiClient {
                     Result.Failure(ApiError.CustomError(response.status.value, errorBody))
                 }
             }
+        } catch (e: TimeoutCancellationException) {
+            Result.Failure(ApiError.Timeout)
+        } catch (e: ClientRequestException) {
+            Result.Failure(ApiError.CustomError(e.response.status.value, e.message ?: ""))
+        } catch (e: IOException) {
+            Result.Failure(ApiError.NetWorkError)
         } catch (e: Exception) {
-            // Tratar exceções, como timeouts e erros desconhecidos
-            when (e) {
-                is io.ktor.client.network.sockets.SocketTimeoutException -> Result.Failure(ApiError.Timeout)
-                else -> Result.Failure(ApiError.Unknown)
+            Result.Failure(ApiError.Unknown)
+        }
+    }
+
+    private suspend fun makeRequest(
+        method: HttpMethod,
+        url: String,
+        headers: MapType,
+        body: Any? = null
+    ): Result<String> {
+        return executeRequest {
+            client.request(url) {
+                this.method = method
+                headers.forEach { (key, value) -> header(key, value) }
+                header(
+                    HttpHeaders.ContentType,
+                    ContentType.Application.Json
+                )
+                if (body != null) setBody(body)
             }
         }
     }
