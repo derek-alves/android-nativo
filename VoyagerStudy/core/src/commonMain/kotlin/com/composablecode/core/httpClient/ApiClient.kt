@@ -1,46 +1,36 @@
-package com.composablecode.core.httpClient
-
 import com.composablecode.core.httpClient.utils.MapType
+import io.ktor.http.HttpMethod
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.serializer
 
 interface ApiClient {
-    suspend fun get(
+    suspend fun <T> request(
+        method: HttpMethod,
         url: String,
-        headers: MapType = emptyMap()
-    ): Result<String>
-
-    suspend fun post(
-        url: String,
-        body: Any? = null,
-        headers: MapType = emptyMap()
-    ): Result<String>
-
-    suspend fun put(
-        url: String,
-        body: Any? = null,
-        headers: MapType = emptyMap()
-    ): Result<String>
-
-    suspend fun delete(
-        url: String,
-        headers: MapType = emptyMap()
-    ): Result<String>
+        serializer: KSerializer<T>,
+        headers: MapType = emptyMap(),
+        body: Any? = null
+    ): Result<T>
 }
 
+suspend inline fun <reified T> ApiClient.get(
+    url: String,
+    headers: MapType = emptyMap()
+): Result<T> = request(
+    method = HttpMethod.Get,
+    url = url,
+    serializer = serializer(),
+    headers = headers
+)
 
-sealed class Result<out T> {
-    data class Success<T>(val data: T) : Result<T>()
-    data class Failure(val error: ApiError) : Result<Nothing>()
-}
-
-sealed class ApiError {
-    data object BadRequest : ApiError()
-    data object Unauthorized : ApiError()
-    data object Forbidden : ApiError()
-    data object NotFound : ApiError()
-    data object InternalServerError : ApiError()
-    data object ServiceUnavailable : ApiError()
-    data object Timeout : ApiError()
-    data object Unknown : ApiError()
-    data object NetWorkError : ApiError()
-    data class CustomError(val statusCode: Int, val message: String) : ApiError()
-}
+suspend inline fun <reified T> ApiClient.post(
+    url: String,
+    body: Any? = null,
+    headers: MapType = emptyMap()
+): Result<T> = request(
+    method = HttpMethod.Post,
+    url = url,
+    serializer = serializer(),
+    headers = headers,
+    body = body
+)

@@ -35,6 +35,7 @@ ktorServerConfigYaml = "3.0.0"
 kotlinxSerialization = "1.7.3"
 coroutines = "1.9.0"
 viewmodelCompose = "2.8.2"
+slf4j = "2.0.9"
 
 
 
@@ -71,7 +72,7 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "coroutines" }
 androidx-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "viewmodelCompose" }
-
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 
 
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
@@ -109,6 +110,7 @@ web-worker-driver = { module = "app.cash.sqldelight:web-worker-driver", version.
 jdbc-driver = { module = "app.cash.sqldelight:jdbc-driver", version.ref = "sqldelight" }
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
 
+logger-slf4j = { module = "org.slf4j:slf4j-nop", version.ref = "slf4j" }
 
 
 [plugins]
