@@ -2,7 +2,7 @@ package com.composablecode.core
 
 import com.composablecode.core.httpClient.ApiClientImpl
 import com.composablecode.core.httpClient.ApiError
-import com.composablecode.core.httpClient.get
+import get
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
